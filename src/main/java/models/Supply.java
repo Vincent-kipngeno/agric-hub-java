@@ -2,14 +2,14 @@ package models;
 
 public class Supply {
     private int id;
-    private int customerId;
+    private int farmerId;
     private int productId;
     private int quantity;
     private int price;
     private int totalPrice;
 
-    public Supply(int customerId, int productId, int quantity, int price) {
-        this.customerId = customerId;
+    public Supply(int farmerId, int productId, int quantity, int price) {
+        this.farmerId = farmerId;
         this.productId = productId;
         this.quantity = quantity;
         this.price = price;
@@ -28,8 +28,8 @@ public class Supply {
         return id;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getFarmerId() {
+        return farmerId;
     }
 
     public int getProductId() {
