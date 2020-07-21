@@ -10,7 +10,7 @@ public interface FarmerDao {
 
     //read
     List<Farmer> getAll();
-    Farmer getId(int id);
+    Farmer findById(int id);
 
     //update
     void update(int id, String name, String location, String email);

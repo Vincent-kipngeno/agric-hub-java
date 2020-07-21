@@ -17,7 +17,7 @@ public class Sql2oFarmerDaoTest {
     @BeforeClass
     public static void setUp() throws Exception {
         String connectionString = "jdbc:postgresql://localhost:5432/agric_hub_test";
-        Sql2o sql2o = new Sql2o(connectionString, "maureenbett", "kenyan082bett");
+        Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
         farmerDao = new Sql2oFarmerDao(sql2o);
         conn = (Connection) sql2o.open();
     }
@@ -35,17 +35,17 @@ public class Sql2oFarmerDaoTest {
     }
     @Test
     public void addingFarmerSetsId() {
-        Farmer farmer= setFarmer();
+        Farmer farmer = setFarmer();
         int originalFarmerId = farmer.getId();
         farmerDao.add(farmer);
-        assertNotEquals(originalFarmerId, farmer. getId());
+        assertNotEquals(originalFarmerId, farmer.getId());
     }
 
     @Test
     public void add_individualFarmerCanBeFoundById() {
         Farmer farmer = setFarmer();
         farmerDao.add(farmer);
-        Farmer foundFarmer = farmerDao.getId(farmer.getId());
+        Farmer foundFarmer = farmerDao.findById(farmer.getId());
         assertEquals(farmer, foundFarmer);
     }
 
@@ -53,8 +53,8 @@ public class Sql2oFarmerDaoTest {
     public void findById_individualFarmerCanBeFoundById() {
         Farmer farmer = setFarmer();
         farmerDao.add(farmer);
-        Farmer foundCustomer = farmerDao.getId(farmer.getId());
-        assertEquals(farmer, foundCustomer);
+        Farmer foundFarmer = farmerDao.findById(farmer.getId());
+        assertEquals(farmer, foundFarmer);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class Sql2oFarmerDaoTest {
         farmerDao.add(farmer);
         int currentId = farmer.getId();
         farmerDao.update(currentId, "kevin", "UG", "kipkev@gmail.com");
-        Farmer updatedFarmer = farmerDao.getId(currentId);
+        Farmer updatedFarmer = farmerDao.findById(currentId);
         assertNotEquals(farmer, updatedFarmer);
     }
 

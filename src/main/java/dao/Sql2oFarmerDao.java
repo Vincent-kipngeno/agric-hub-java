@@ -27,6 +27,7 @@ public class Sql2oFarmerDao implements FarmerDao {
             System.out.println(ex);
         }
     }
+
     @Override
     public List<Farmer> getAll() {
         String sql = "SELECT * FROM farmers;";
@@ -37,7 +38,7 @@ public class Sql2oFarmerDao implements FarmerDao {
     }
 
     @Override
-    public Farmer getId(int id) {
+    public Farmer findById(int id) {
         String sql = "SELECT * FROM farmers WHERE id = :id;";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
@@ -76,5 +77,4 @@ public class Sql2oFarmerDao implements FarmerDao {
                     .executeUpdate();
         }
     }
-
 }
