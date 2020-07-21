@@ -47,6 +47,35 @@ public class Sql2oCustomerDao implements CustomerDao {
         }
     }
 
+    @Override
+    public void update(int id, String name, String location, String email) {
+        String sql = "UPDATE customers SET (name, location, email) = (:name, :location, :email); ";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("name", name)
+                    .addParameter("location", location)
+                    .addParameter("email", email)
+                    .executeUpdate();
+        }
+    }
 
+    @Override
+    public void deleteById(int id) {
+        String sql = "DELETE FROM customers WHERE id = :id ;";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }
+    }
+
+    @Override
+    public void clearAll() {
+        String sql = "DELETE FROM customers;";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        }
+    }
 
 }
