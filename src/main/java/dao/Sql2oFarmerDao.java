@@ -49,12 +49,13 @@ public class Sql2oFarmerDao implements FarmerDao {
 
     @Override
     public void update(int id, String name, String location, String email) {
-        String sql = "UPDATE farmers SET (name, location, email) = (:name, :location, :email); ";
+        String sql = "UPDATE farmers SET (name, location, email) = (:name, :location, :email) WHERE id = :id; ";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("name", name)
                     .addParameter("location", location)
                     .addParameter("email", email)
+                    .addParameter("id", id)
                     .executeUpdate();
         }
     }

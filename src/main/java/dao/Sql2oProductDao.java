@@ -49,7 +49,7 @@ public class Sql2oProductDao implements ProductDao {
 
     @Override
     public void update(int id, String name) {
-        String sql = "UPDATE products SET name = :name ; ";
+        String sql = "UPDATE products SET name = :name WHERE id = :id; ";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("name", name)
