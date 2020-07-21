@@ -43,7 +43,7 @@ public class ProductTest {
     @Test
     public void getName_nameInstantiatesCorrectly() {
         Product product = setProduct();
-        assertEquals(1, product.getName());
+        assertEquals("mangoes", product.getName());
     }
 
     //helpers
