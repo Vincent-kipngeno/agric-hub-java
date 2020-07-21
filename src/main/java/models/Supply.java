@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 public class Supply {
     private int id;
     private int farmerId;
@@ -12,6 +14,23 @@ public class Supply {
         this.productId = productId;
         this.quantity = quantity;
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Supply supply = (Supply) o;
+        return id == supply.id &&
+                farmerId == supply.farmerId &&
+                productId == supply.productId &&
+                quantity == supply.quantity &&
+                price == supply.price;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, farmerId, productId, quantity, price);
     }
 
     public void setId(int id) {
