@@ -16,7 +16,7 @@ public class Sql2oFarmerDao implements FarmerDao {
 
     @Override
     public void add(Farmer farmer) {
-        String sql = "INSERT INTO customers (name, location, email) VALUES (:name, :location, :email);";
+        String sql = "INSERT INTO farmers (name, location, email) VALUES (:name, :location, :email);";
         try (Connection conn = sql2o.open()) {
             int id = (int) conn.createQuery(sql, true)
                     .bind(farmer)
@@ -27,7 +27,6 @@ public class Sql2oFarmerDao implements FarmerDao {
             System.out.println(ex);
         }
     }
-
     @Override
     public List<Farmer> getAll() {
         String sql = "SELECT * FROM farmers;";

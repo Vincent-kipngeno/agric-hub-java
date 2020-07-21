@@ -17,7 +17,7 @@ public class Sql2oCustomerDaoTest {
     @BeforeClass
     public static void setUp() throws Exception {
         String connectionString = "jdbc:postgresql://localhost:5432/agric_hub_test";
-        Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
+        Sql2o sql2o = new Sql2o(connectionString, "maureenbett", "kenyan082bett");
         customerDao = new Sql2oCustomerDao(sql2o);
         conn = (Connection) sql2o.open();
     }
