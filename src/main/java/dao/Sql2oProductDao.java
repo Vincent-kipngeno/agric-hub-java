@@ -53,6 +53,7 @@ public class Sql2oProductDao implements ProductDao {
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("name", name)
+                    .addParameter("id", id)
                     .executeUpdate();
         }
     }
