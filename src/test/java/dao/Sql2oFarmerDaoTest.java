@@ -34,15 +34,15 @@ public class Sql2oFarmerDaoTest {
         System.out.println("Connection closed");
     }
     @Test
-    public void addingCustomerSetsId() {
+    public void addingFarmerSetsId() {
         Farmer farmer= setFarmer();
-        int originalCustomerId = farmer.getId();
+        int originalFarmerId = farmer.getId();
         farmerDao.add(farmer);
-        assertNotEquals(originalCustomerId, farmer. getId());
+        assertNotEquals(originalFarmerId, farmer. getId());
     }
 
     @Test
-    public void add_individualCustomerCanBeFoundById() {
+    public void add_individualFarmerCanBeFoundById() {
         Farmer farmer = setFarmer();
         farmerDao.add(farmer);
         Farmer foundFarmer = farmerDao.getId(farmer.getId());
@@ -50,7 +50,7 @@ public class Sql2oFarmerDaoTest {
     }
 
     @Test
-    public void findById_individualCustomerCanBeFoundById() {
+    public void findById_individualFarmerCanBeFoundById() {
         Farmer farmer = setFarmer();
         farmerDao.add(farmer);
         Farmer foundCustomer = farmerDao.getId(farmer.getId());
@@ -58,7 +58,7 @@ public class Sql2oFarmerDaoTest {
     }
 
     @Test
-    public void getAll_allCustomersAreReturnedCorrectly() {
+    public void getAll_allFarmersAreReturnedCorrectly() {
         Farmer farmer = setFarmer();
         farmerDao.add(farmer);
         assertEquals(1, farmerDao.getAll().size());
@@ -70,7 +70,7 @@ public class Sql2oFarmerDaoTest {
     }
 
     @Test
-    public void update_customerIsUpdatedCorrectly() {
+    public void update_farmerIsUpdatedCorrectly() {
         Farmer farmer = setFarmer();
         farmerDao.add(farmer);
         int currentId = farmer.getId();
@@ -80,7 +80,7 @@ public class Sql2oFarmerDaoTest {
     }
 
     @Test
-    public void deleteById_individualCustomerIsDeletedCorrectlyByItsId() {
+    public void deleteById_individualFarmerIsDeletedCorrectlyByItsId() {
         Farmer farmer = setFarmer();
         Farmer otherFarmer = setFarmer();
         farmerDao.add(farmer);
@@ -90,7 +90,7 @@ public class Sql2oFarmerDaoTest {
     }
 
     @Test
-    public void clearAll_allAddedCustomersCanBeCleared() {
+    public void clearAll_allAddedFarmersCanBeCleared() {
         Farmer farmer = setFarmer();
         Farmer otherFarmer = setFarmer();
         farmerDao.add(farmer);
