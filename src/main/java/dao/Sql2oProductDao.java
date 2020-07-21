@@ -39,7 +39,7 @@ public class Sql2oProductDao implements ProductDao {
 
     @Override
     public Product findById(int id) {
-        String sql = "SELECT * FROM products WHERE id = :id;";
+        String sql = "SELECT * FROM products WHERE id = :id ;";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                     .addParameter("id", id)
@@ -49,7 +49,7 @@ public class Sql2oProductDao implements ProductDao {
 
     @Override
     public void update(int id, String name) {
-        String sql = "UPDATE products SET (name) = (:name); ";
+        String sql = "UPDATE products SET name = :name ; ";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("name", name)
