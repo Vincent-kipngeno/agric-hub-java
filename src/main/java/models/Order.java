@@ -1,6 +1,7 @@
 package models;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Order {
     private int id;
@@ -14,6 +15,23 @@ public class Order {
         this.productId = productId;
         this.quantity = quantity;
         setPrice(supplies);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return id == order.id &&
+                customerId == order.customerId &&
+                productId == order.productId &&
+                quantity == order.quantity &&
+                price == order.price;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, customerId, productId, quantity, price);
     }
 
     public void setId(int id) {
