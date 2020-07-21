@@ -1,25 +1,33 @@
 package models;
 
+import java.util.List;
+
 public class Order {
     private int id;
     private int customerId;
     private int productId;
     private int quantity;
-    private int totalPrice;
+    private int price;
 
-    public Order(int customerId, int productId, int quantity, Supply supply) {
+    public Order(int customerId, int productId, int quantity, List<Supply> supplies) {
         this.customerId = customerId;
         this.productId = productId;
         this.quantity = quantity;
-        setTotalPrice(supply);
+        setPrice(supplies);
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setTotalPrice(Supply supply) {
-        this.totalPrice = supply.getPrice() * this.quantity;
+
+    //take all the supplies with the product id of this order loop through their prices and find total price then find the average
+    public void setPrice(List<Supply> supplies) {
+        int supplyPrice = 0;
+        for (Supply supply : supplies) {
+            supplyPrice += supply.getPrice();
+        }
+        this.price = supplyPrice / supplies.size();
     }
 
     public int getId() {
@@ -34,11 +42,7 @@ public class Order {
         return productId;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
+    public int getQuantity() { return quantity; }
 
-    public int getTotalPrice() {
-        return totalPrice;
-    }
+    public int getTotalPrice() { return quantity * price; }
 }
