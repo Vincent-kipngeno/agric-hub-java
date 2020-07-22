@@ -170,28 +170,96 @@ public class App {
                                 ////Customers
 
         //get a form to Create a Customer instance (Customer makes the order of farm products)
-        //get("/customers/new")
+
+        get("/customers/new", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            List<Customer> customers = customerDao.getAll();
+            models.put("customer", customers);
+            models.put("customers", customerDao.getAll());
+            return new ModelAndView(models, "customer-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: Create a customer instance
         //post("/customers")
+        post("/customers", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            String name = req.queryParams("name");
+            String location = req.queryParams("location");
+            String email = req.queryParams("email");
+            Customer customer = new Customer(name, location, email);
+            customerDao.add(customer);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
 
         //get: delete all customers
-        //get("/customers/delete)
+
+        get("/customers/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            customerDao.clearAll();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete a customer entry together with orders made by the customer
-        //get("/customers/:id/delete")
+
+        get("/customers/:id/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int customerId = Integer.parseInt(req.params("id"));
+            customerDao.deleteById(customerId);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete all orders
-        //get("/orders/delete")
+        get("/orders/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            orderDao.clearAll();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: display details of a customer together with orders made by the customer.
-        //get("/customers/:id")
+
+        get("/customers/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int customerId = Integer.parseInt(req.params("id"));
+            Customer customerToFind = customerDao.findById(customerId);
+            models.put("customer", customerToFind);
+            models.put("orders", customerDao.getAllOrdersByCustomerId(customerId));
+            List<Customer> customers = customerDao.getAll();
+            models.put("customers", customers);
+            models.put("farmers", farmerDao.getAll());
+            models.put("orders", orderDao.getAll());
+            return new ModelAndView(models, "customer-details.hbs");
+        }, new HandlebarsTemplateEngine());
+
 
         //get: get form to update a customer
-        //get("/customers/:id/edit")
+
+        get("/customers/:id/edit", (req, resp) -> {
+            Map<String, Object> models = new HashMap<>();
+            int customerId = Integer.parseInt(req.params("id"));
+            models.put("editCustomer", customerDao.findById(customerId));
+            List<Customer> customers = customerDao.getAll();
+            models.put("customers", customers);
+            models.put("farmers", farmerDao.getAll());
+            models.put("orders", orderDao.getAll());
+            return new ModelAndView(models, "customer-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: update a customer's details
-        //post("/customers/:id")
+        post("/customers/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int customerId = Integer.parseInt(req.params("id"));
+            String name = req.queryParams("name");
+            String location = req.queryParams("location");
+            String email = req.queryParams("email");
+            customerDao.update(customerId, name, location, email);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
                                 ////orders
 
