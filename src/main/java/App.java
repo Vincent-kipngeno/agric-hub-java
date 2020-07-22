@@ -213,7 +213,12 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: delete all orders
-        //get("/orders/delete")
+        get("/orders/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            orderDao.clearAll();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: display details of a customer together with orders made by the customer.
         //get("/customers/:id")
