@@ -5,10 +5,14 @@
             <div class="form-group">
                 <label for="name">EDIT NAME</label>
                 <input id="name" placeholder="Edit farmer name here....." name="name" class="form-control" type="text" value="{{editFarmer.name}}">
-                <label for="name">EDIT LOCATION</label>
-                <input id="name" placeholder="Edit location here....." name="location" class="form-control" type="text" value="{{editFarmer.location}}">
-                <label for="name">EDIT EMAIL</label>
-                <input id="name" placeholder="Edit farmer email here....." name="email" class="form-control" type="text" value="{{editFarmer.email}}">
+            </div>
+            <div class="form-group">
+                <label for="location">EDIT LOCATION</label>
+                <input id="location" placeholder="Edit location here....." name="location" class="form-control" type="text" value="{{editFarmer.location}}">
+            </div>
+            <div class="form-group">
+                <label for="email">EDIT EMAIL</label>
+                <input id="email" placeholder="Edit farmer email here....." name="email" class="form-control" type="email" value="{{editFarmer.email}}">
             </div>
             <button type="submit" class="button btn-default">EDIT</button>
         </form>
@@ -18,12 +22,17 @@
             <div class="form-group">
                 <label for="name">ENTER NAME</label>
                 <input id="name" placeholder="Enter farmer name here....." name="name" class="form-control" type="text" value="">
-                <label for="name">ENTER LOCATION</label>
-                <input id="name" placeholder="Enter location here....." name="location" class="form-control" type="text" value="">
-                <label for="name">ENTER EMAIL</label>
-                <input id="name" placeholder="Enter farmer email here....." name="email" class="form-control" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="location">ENTER LOCATION</label>
+                <input id="location" placeholder="Enter location here....." name="location" class="form-control" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="email">ENTER EMAIL</label>
+                <input id="email" placeholder="Enter farmer email here....." name="email" class="form-control" type="email" value="">
             </div>
             <button type="submit" class="button btn-warning">SUBMIT</button>
         </form>
     {{/if}}
     {{/partial}}
+{{> layout.hbs}}

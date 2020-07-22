@@ -5,7 +5,27 @@
         <p> NAME OF FARMER:{{ farmer.name }}</p>
             <p> LOCATION: {{farmer.location}}</p>
             <p>EMAIL: {{farmer.email}}</p>
-            <p>SUPPLIES MADE: {{farmer.supplies}}</p>
+        <tr>
+            <td>Supplies MADE:</td>
+        </tr>
+        <tr>
+            <td> Farmer </td>
+            <td> Product </td>
+            <td> Quantity </td>
+        </tr>
+        {{#each orders}}
+            <tr>
+                <td>
+                    {{farmerName}}
+                </td>
+                <td>
+                    {{productName}}
+                </td>
+                <td>
+                    {{quantity}}
+                </td>
+            </tr>
+        {{/each}}
             <div class="row">
                 <div class="col-md-12">
                     <div class = "col-md-12">

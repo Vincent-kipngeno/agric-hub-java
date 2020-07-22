@@ -1,34 +1,128 @@
+import models.*;
+import dao.*;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
+import spark.ModelAndView;
+import spark.template.handlebars.HandlebarsTemplateEngine;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static spark.Spark.*;
+
 public class App {
     public static void main(String[] args) {
+        Sql2oOrderDao orderDao;
+        Sql2oSupplyDao supplyDao;
+        Sql2oFarmerDao farmerDao;
+        Sql2oCustomerDao customerDao;
+        Sql2oProductDao productDao;
+        Connection conn;
 
+        String connectionString = "jdbc:postgresql://localhost:5432/agric_hub";
+        Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
+        orderDao = new Sql2oOrderDao(sql2o);
+        supplyDao = new Sql2oSupplyDao(sql2o);
+        farmerDao = new Sql2oFarmerDao(sql2o);
+        customerDao = new Sql2oCustomerDao(sql2o);
+        productDao = new Sql2oProductDao(sql2o);
+        conn = sql2o.open();
 
         //get: view list of all customers, farmers, products in the navbar and list of supplies made in index.hbs
-        //get("/")
+        get("/", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            List<Farmer> farmers = farmerDao.getAll();
+            models.put("farmers", farmers);
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "index.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //get a form to Create a Farmer instance (farmer is the supplier of farm products)
-        //get("/farmers/new")
+        get("/farmers/new", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            List<Farmer> farmers = farmerDao.getAll();
+            models.put("farmers", farmers);
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "farmer-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: Create a Farmer instance (farmer is the supplier of farm products)
-        //post("/farmers")
+        post("/farmers", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            String name = req.queryParams("name");
+            String location = req.queryParams("location");
+            String email = req.queryParams("email");
+            Farmer farmer = new Farmer(name, location, email);
+            farmerDao.add(farmer);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
 
         //get: delete all farmers
-        //get("/farmers/delete)
+        get("/farmers/delete", (req, res) -> {
+           Map<String, Object> models = new HashMap<>();
+           farmerDao.clearAll();
+           res.redirect("/");
+           return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete a farmer entry together with supplies made by the farmer
-        //get("/farmers/:id/delete")
+        get("/farmers/:id/delete", (req, res) -> {
+           Map<String, Object> models = new HashMap<>();
+           int farmerId = Integer.parseInt(req.params("id"));
+           farmerDao.deleteById(farmerId);
+           res.redirect("/");
+           return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete all supplies
-        //get("/supplies/delete")
+        get("/supplies/delete", (req, res) -> {
+           Map<String, Object> models = new HashMap<>();
+           supplyDao.clearAll();
+           res.redirect("/");
+           return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: display details of a farmer together with supplies made by the farmer.
-        //get("/farmers/:id")
+        get("/farmers/:id", (req, res) -> {
+           Map<String, Object> models = new HashMap<>();
+           int farmerId = Integer.parseInt(req.params("id"));
+           Farmer farmerToFind = farmerDao.findById(farmerId);
+           models.put("farmer", farmerToFind);
+           models.put("supplies", farmerDao.getAllSuppliesByFarmerId(farmerId));
+           List<Farmer> farmers = farmerDao.getAll();
+           models.put("farmers", farmers);
+           models.put("customers", customerDao.getAll());
+           models.put("products", productDao.getAll());
+           return new ModelAndView(models, "farmer-details.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //get: get form to update a farmer
-        //get("/farmers/:id/edit")
-
+        get("/farmers/:id/edit", (req, resp) -> {
+           Map<String, Object> models = new HashMap<>();
+           int farmerId = Integer.parseInt(req.params("id"));
+           models.put("editFarmer", farmerDao.findById(farmerId));
+           List<Farmer> farmers = farmerDao.getAll();
+           models.put("farmers", farmers);
+           models.put("customers", customerDao.getAll());
+           models.put("products", productDao.getAll());
+           return new ModelAndView(models, "farmer-form.hbs");
+        }, new HandlebarsTemplateEngine());
         //post: update a farmer's details
-        //post("/farmers/:id")
+        post("/farmers/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int farmerId = Integer.parseInt(req.params("id"));
+            String name = req.queryParams("name");
+            String location = req.queryParams("location");
+            String email = req.queryParams("email");
+            farmerDao.update(farmerId, name, location, email);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
                          ////Supplies
         //get a form to Create a Supply instance
