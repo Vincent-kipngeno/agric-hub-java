@@ -2,19 +2,32 @@ package models;
 
 import java.util.List;
 import java.util.Objects;
+import dao.*;
 
 public class Order {
     private int id;
     private int customerId;
+    private String customerName;
     private int productId;
+    private String productName;
     private int quantity;
     private int price;
 
-    public Order(int customerId, int productId, int quantity, List<Supply> supplies) {
+    public Order(int customerId, String customerName, int productId, String productName, int quantity, List<Supply> supplies) {
         this.customerId = customerId;
         this.productId = productId;
         this.quantity = quantity;
+        this.customerName = customerName;
+        this.productName = productName;
         setPrice(supplies);
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 
     @Override

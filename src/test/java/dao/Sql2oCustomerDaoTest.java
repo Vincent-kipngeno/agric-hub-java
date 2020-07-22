@@ -129,9 +129,9 @@ public class Sql2oCustomerDaoTest {
         List<Supply> supplies = new ArrayList<>();
         supplies.add(supply);
         supplies.add(supply1);
-        Order order = new Order (customer.getId(), product.getId(), 4, supplies);
+        Order order = new Order (customer.getId(), customer.getName(), product.getId(), product.getName(), 4, supplies);
         orderDao.add(order);
-        Order anotherOrder = new Order (customer.getId(), product.getId(), 4, supplies);
+        Order anotherOrder = new Order (customer.getId(), customer.getName(), product.getId(), product.getName(), 4, supplies);
         orderDao.add(anotherOrder);
         List<Order> orders = customerDao.getAllOrdersByCustomerId(customer.getId());
         assertTrue(orders.contains(order));

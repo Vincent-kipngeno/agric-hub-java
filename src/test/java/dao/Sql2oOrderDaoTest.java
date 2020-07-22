@@ -104,7 +104,7 @@ public class Sql2oOrderDaoTest {
         suppliesA.add(supplyB);
         suppliesA.add(supplyB);
         order.setPrice(suppliesA);
-        orderDao.update(currentId, customerA.getId(), productA.getId(), 4, order.getPrice());
+        orderDao.update(currentId, customerA.getId(), customerA.getName(), productA.getId(), productA.getName(), 4, order.getPrice());
         Order updatedOrder = orderDao.findById(currentId);
         assertNotEquals(order, updatedOrder);
     }
@@ -145,6 +145,6 @@ public class Sql2oOrderDaoTest {
         List<Supply> supplies = new ArrayList<>();
         supplies.add(supply);
         supplies.add(supply1);
-        return new Order (customer.getId(), product.getId(), 4, supplies);
+        return new Order (customer.getId(), customer.getName(), product.getId(), product.getName(), 4, supplies);
     }
 }
