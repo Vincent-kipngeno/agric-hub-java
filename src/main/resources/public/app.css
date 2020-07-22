@@ -1,10 +1,26 @@
 .r-index{
     background: url('/images/index.jpg');
     background-size: cover;
-    background-repeat: none;
+    background-repeat: no-repeat;
 }
 
 .jumbotron {
     background: none
 }
 
+.r-supplyform{
+    background: url('/images/supply.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.r-formContainer{
+    position: absolute;
+    right: 0;
+    margin: 20px;
+    max-width: 500px;
+    padding: 16px;
+    background-color: white;
+}
