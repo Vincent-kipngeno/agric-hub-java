@@ -16,7 +16,7 @@ public class Sql2oOrderDao implements OrderDao {
 
     @Override
     public void add(Order order) {
-        String sql = "INSERT INTO orders (customerid, productid, quantity, price) VALUES (:customerId, :productId, :quantity, :price);";
+        String sql = "INSERT INTO orders (customerid, productid, quantity) VALUES (:customerId, :productId, :quantity);";
         try (Connection conn = sql2o.open()) {
             int id = (int) conn.createQuery(sql, true)
                     .bind(order)
@@ -49,13 +49,12 @@ public class Sql2oOrderDao implements OrderDao {
 
     @Override
     public void update(int id, int customerId, int productId, int quantity, int price) {
-        String sql = "UPDATE orders SET (customerid, productid, quantity, price) = (:customerId, :productId, :quantity, :price) WHERE id = :id; ";
+        String sql = "UPDATE orders SET (customerid, productid, quantity) = (:customerId, :productId, :quantity) WHERE id = :id; ";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("customerId", customerId)
                     .addParameter("productId", productId)
                     .addParameter("quantity", quantity)
-                    .addParameter("price", price)
                     .addParameter("id", id)
                     .executeUpdate();
         }

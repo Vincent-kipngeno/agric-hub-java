@@ -25,13 +25,12 @@ public class Order {
         return id == order.id &&
                 customerId == order.customerId &&
                 productId == order.productId &&
-                quantity == order.quantity &&
-                price == order.price;
+                quantity == order.quantity;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customerId, productId, quantity, price);
+        return Objects.hash(id, customerId, productId, quantity);
     }
 
     public void setId(int id) {
