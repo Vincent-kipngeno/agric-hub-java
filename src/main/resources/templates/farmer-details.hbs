@@ -1,2 +1,18 @@
 {{#partial "content"}}
+    <div class="row">
+    <div class="col-md-6">
+    <div class="Details">
+
+
+    {{#if farmer}}
+            <p> NAME OF FARMER:{{ farmer.name }}</p>
+            <p> LOCATION: {{farmer.location}}</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class = "col-md-12">
+                        <a class="btn btn-warning" href="/animals/sighting/{{sighting.id}}/edit">Edit</a>
+                        <a class="btn btn-warning" href="/animals/{{sighting.animalId}}/sightings/{{sighting.id}}/delete">DELETE</a>
+                    </div>
+                </div>
+            </div>
     {{/partial}}
