@@ -1,6 +1,7 @@
 package dao;
 
 import models.Farmer;
+import models.Supply;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
@@ -76,6 +77,16 @@ public class Sql2oFarmerDao implements FarmerDao {
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .executeUpdate();
+        }
+    }
+
+    @Override
+    public List<Supply> getAllSuppliesByFarmerId(int id) {
+        String sql = "SELECT * FROM supplies WHERE farmerid = :id;";
+        try(Connection conn = sql2o.open()) {
+            return conn.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetch(Supply.class);
         }
     }
 }

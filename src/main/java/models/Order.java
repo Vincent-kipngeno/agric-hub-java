@@ -63,4 +63,8 @@ public class Order {
     public int getQuantity() { return quantity; }
 
     public int getTotalPrice() { return quantity * price; }
+
+    public int getPrice() {
+        return price;
+    }
 }

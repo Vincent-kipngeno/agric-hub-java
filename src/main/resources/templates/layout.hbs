@@ -21,8 +21,80 @@
     <body>
 
     <header>
+        <nav class="navbar navbar-fixed-top navbar-dark" style="background-color:black;" >
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div  class="navbar-header">
+                    <button  type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span style = "float: right" class = "btn btn-default" style = "color: white" >Toggle</span>
+                    </button>
+                    <a style = "color: white" class="navbar-brand" href="/">AGRI-HUB</a>
+                </div>
 
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Farmers Menu <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                {{#if farmers}}
+                                    {{#each farmers}}
+                                        <li><a style="color: orange;" href="/farmers/{{id}}">{{name}}</a></li>
+                                    {{/each}}
+                                    <li><a style="color: orange;" href="/farmers/new">Add Farmer</a></li>
 
+                                {{else}}
+                                    <li><a style="color: orange;" href="/farmers/new">Add Farmer</a></li>
+                                {{/if}}
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Supply Menu<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a style="color: orange;" href="/supplies">View supplies</a></li>
+                                <li><a style="color: orange;" href="/supplies/new">Make a Supply</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products Menu <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                {{#if products}}
+                                    {{#each products}}
+                                        <li><a style="color: orange;" href="/products/{{id}}">{{name}}</a></li>
+                                    {{/each}}
+                                    <li><a style="color: orange;" href="/products/new">Add product</a></li>
+
+                                {{else}}
+                                    <li><a style="color: orange;" href="/products/new">Add product</a></li>
+                                {{/if}}
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Order Menu<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a style="color: orange;" href="/orders">View orders</a></li>
+                                <li><a style="color: orange;" href="/orders/new">Place an order</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Customers Menu <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                {{#if customers}}
+                                    {{#each customer}}
+                                        <li><a style="color: orange;" href="/customers/{{id}}">{{name}}</a></li>
+                                    {{/each}}
+                                    <li><a style="color: orange;" href="/customers/new">Add a customer</a></li>
+
+                                {{else}}
+                                    <li><a style="color: orange;" href="/customers/new">Add a customer</a></li>
+                                {{/if}}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
     <div class="container">
 

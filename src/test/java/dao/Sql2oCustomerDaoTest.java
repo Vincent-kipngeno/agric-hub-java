@@ -1,6 +1,6 @@
 package dao;
 
-import models.Customer;
+import models.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -8,10 +8,17 @@ import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class Sql2oCustomerDaoTest {
     private static Sql2oCustomerDao customerDao;
+    private static Sql2oFarmerDao farmerDao;
+    private static Sql2oProductDao productDao;
+    private static Sql2oSupplyDao supplyDao;
+    private static Sql2oOrderDao orderDao;
     private static Connection conn;
 
     @BeforeClass
@@ -19,6 +26,10 @@ public class Sql2oCustomerDaoTest {
         String connectionString = "jdbc:postgresql://localhost:5432/agric_hub_test";
         Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
         customerDao = new Sql2oCustomerDao(sql2o);
+        farmerDao = new Sql2oFarmerDao(sql2o);
+        productDao = new Sql2oProductDao(sql2o);
+        supplyDao = new Sql2oSupplyDao(sql2o);
+        orderDao = new Sql2oOrderDao(sql2o);
         conn = (Connection) sql2o.open();
     }
 
@@ -26,6 +37,10 @@ public class Sql2oCustomerDaoTest {
     public void tearDown() throws Exception {
         System.out.println("Clearing database");
         customerDao.clearAll();
+        farmerDao.clearAll();
+        productDao.clearAll();
+        farmerDao.clearAll();
+        orderDao.clearAll();
     }
 
     @AfterClass
@@ -97,6 +112,31 @@ public class Sql2oCustomerDaoTest {
         customerDao.add(otherCustomer);
         customerDao.clearAll();
         assertEquals(0, customerDao.getAll().size());
+    }
+
+    @Test
+    public void getAllOrders_allOrdersMadeByFarmersCanBeRetrieved() {
+        Farmer farmer = new Farmer("henry", "nike", "hen@gmail.com");
+        farmerDao.add(farmer);
+        Customer customer = new Customer("henken", "mom", "hen@gmail.com");
+        customerDao.add(customer);
+        Product product = new Product("mangoes");
+        productDao.add(product);
+        Supply supply = new Supply(farmer.getId(), product.getId(), 4, 100);
+        Supply supply1 = new Supply(farmer.getId(), product.getId(), 6, 100);
+        supplyDao.add(supply);
+        supplyDao.add(supply1);
+        List<Supply> supplies = new ArrayList<>();
+        supplies.add(supply);
+        supplies.add(supply1);
+        Order order = new Order (customer.getId(), product.getId(), 4, supplies);
+        orderDao.add(order);
+        Order anotherOrder = new Order (customer.getId(), product.getId(), 4, supplies);
+        orderDao.add(anotherOrder);
+        List<Order> orders = customerDao.getAllOrdersByCustomerId(customer.getId());
+        assertTrue(orders.contains(order));
+        assertTrue(orders.contains(anotherOrder));
+        assertEquals(2, orders.size());
     }
 
     public Customer setCustomer(){
