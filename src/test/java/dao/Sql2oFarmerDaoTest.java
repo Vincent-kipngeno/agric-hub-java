@@ -23,7 +23,7 @@ public class Sql2oFarmerDaoTest {
     @BeforeClass
     public static void setUp() throws Exception {
         String connectionString = "jdbc:postgresql://localhost:5432/agric_hub_test";
-        Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
+        Sql2o sql2o = new Sql2o(connectionString, "maureenbett", "Kenyan082bett");
         farmerDao = new Sql2oFarmerDao(sql2o);
         productDao = new Sql2oProductDao(sql2o);
         supplyDao = new Sql2oSupplyDao(sql2o);
@@ -35,7 +35,7 @@ public class Sql2oFarmerDaoTest {
         System.out.println("Clearing database");
         farmerDao.clearAll();
         productDao.clearAll();
-        farmerDao.clearAll();
+        supplyDao.clearAll();
     }
 
     @AfterClass
@@ -115,9 +115,9 @@ public class Sql2oFarmerDaoTest {
         farmerDao.add(farmer);
         Product product = new Product("mangoes");
         productDao.add(product);
-        Supply supply = new Supply(farmer.getId(), product.getId(), 4, 200);
+        Supply supply = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 200);
         supplyDao.add(supply);
-        Supply anotherSupply = new Supply(farmer.getId(), product.getId(), 4, 600);
+        Supply anotherSupply = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 600);
         supplyDao.add(anotherSupply);
         List<Supply> supplies = farmerDao.getAllSuppliesByFarmerId(farmer.getId());
         assertTrue(supplies.contains(supply));

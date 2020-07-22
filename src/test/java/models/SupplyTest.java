@@ -47,9 +47,21 @@ public class SupplyTest {
     }
 
     @Test
+    public void getFarmerName_farmerNameInstantiatesCorrectly() {
+        Supply supply = setSupply();
+        assertEquals("kev", supply.getFarmerName());
+    }
+
+    @Test
     public void getProductId_productIdInstantiatesCorrectly() {
         Supply supply = setSupply();
         assertEquals(1, supply.getProductId());
+    }
+
+    @Test
+    public void getProductName_productNameInstantiatesCorrectly() {
+        Supply supply = setSupply();
+        assertEquals("ken", supply.getProductName());
     }
 
     @Test
@@ -72,6 +84,6 @@ public class SupplyTest {
 
     //helpers
     public Supply setSupply() {
-        return new Supply (1, 1, 5, 200);
+        return new Supply (1, "kev", 1, "ken", 5, 200);
     }
 }

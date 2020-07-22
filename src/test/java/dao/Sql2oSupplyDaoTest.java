@@ -21,7 +21,7 @@ public class Sql2oSupplyDaoTest {
     @BeforeClass
     public static void setUp() throws Exception {
         String connectionString = "jdbc:postgresql://localhost:5432/agric_hub_test";
-        Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
+        Sql2o sql2o = new Sql2o(connectionString, "maureenbett", "kenyan082bett");
         farmerDao = new Sql2oFarmerDao(sql2o);
         supplyDao = new Sql2oSupplyDao(sql2o);
         productDao = new Sql2oProductDao(sql2o);
@@ -86,7 +86,7 @@ public class Sql2oSupplyDaoTest {
         farmerDao.add(farmerA);
         Product productA = new Product("apple");
         productDao.add(productA);
-        supplyDao.update(currentId, farmerA.getId(), productA.getId(), 4, 200);
+        supplyDao.update(currentId, farmerA.getId(), farmerA.getName(), productA.getId(), productA.getName(), 4, 200);
         Supply updatedSupply = supplyDao.findById(currentId);
         assertNotEquals(supply, updatedSupply);
     }
@@ -118,6 +118,6 @@ public class Sql2oSupplyDaoTest {
         farmerDao.add(farmer);
         Product product = new Product("mangoes");
         productDao.add(product);
-        return new Supply(farmer.getId(), product.getId(), 4, 200);
+        return new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 200);
     }
 }

@@ -1,0 +1,21 @@
+{{#partial "content"}}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="Details">
+                <p> NAME OF CUSTOMER:{{ customer.name }}</p>
+                <p> LOCATION: {{customer.location}}</p>
+                <p> EMAIL: {{customer.email}}</p>
+                <p> ORDERS MADE: {{customer.orders}}</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class = "col-md-12">
+                            <a class="btn btn-warning" href="/customers/:id/edit">EDIT</a>
+                            <a class="btn btn-warning" href="/customers/:id/delete">DELETE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{/partial}}
