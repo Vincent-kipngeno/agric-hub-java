@@ -186,8 +186,8 @@ public class App {
             String name = req.queryParams("name");
             String location = req.queryParams("location");
             String email = req.queryParams("email");
-            Farmer farmer = new Farmer(name, location, email);
-            farmerDao.add(farmer);
+            Customer customer = new Customer(name, location, email);
+            customerDao.add(customer);
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
