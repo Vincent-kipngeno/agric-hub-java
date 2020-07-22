@@ -230,7 +230,7 @@ public class App {
             models.put("orders", customerDao.getAllOrdersByCustomerId(customerId));
             List<Customer> customers = customerDao.getAll();
             models.put("customers", customers);
-            models.put("customers", customerDao.getAll());
+            models.put("farmers", farmerDao.getAll());
             models.put("orders", orderDao.getAll());
             return new ModelAndView(models, "customer-details.hbs");
         }, new HandlebarsTemplateEngine());
@@ -250,7 +250,16 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //post: update a customer's details
-        //post("/customers/:id")
+        post("/customers/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int customerId = Integer.parseInt(req.params("id"));
+            String name = req.queryParams("name");
+            String location = req.queryParams("location");
+            String email = req.queryParams("email");
+            customerDao.update(customerId, name, location, email);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
                                 ////orders
 
