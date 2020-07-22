@@ -203,7 +203,14 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: delete a customer entry together with orders made by the customer
-        //get("/customers/:id/delete")
+
+        get("/customers/:id/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int customerId = Integer.parseInt(req.params("id"));
+            customerDao.deleteById(customerId);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete all orders
         //get("/orders/delete")
