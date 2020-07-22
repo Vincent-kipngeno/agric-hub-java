@@ -1,0 +1,29 @@
+{{#partial "content"}}
+    {{#if editCustomer}}
+        <h1>EDIT HERE</h1>
+        <form class="formstyle" action="/customers/:id" method="post">
+            <div class="form-group">
+                <label for="name">EDIT NAME</label>
+                <input id="name" placeholder="Edit customer name here....." name="name" class="form-control" type="text" value="{{editCustomer.name}}">
+                <label for="name">EDIT LOCATION</label>
+                <input id="name" placeholder="Edit customer location here....." name="location" class="form-control" type="text" value="{{editCustomer.location}}">
+                <label for="name">EDIT EMAIL</label>
+                <input id="name" placeholder="Edit customer email here....." name="email" class="form-control" type="text" value="{{editCustomer.email}}">
+            </div>
+            <button type="submit" class="button btn-default">EDIT</button>
+        </form>
+    {{else}}
+        <h1>ENTER CUSTOMER CREDENTIALS HERE:</h1>
+        <form class="formstyle" action="/customers" method="post">
+            <div class="form-group">
+                <label for="name">ENTER NAME</label>
+                <input id="name" placeholder="Enter customer name here....." name="name" class="form-control" type="text" value="">
+                <label for="name">ENTER LOCATION</label>
+                <input id="name" placeholder="Enter  customer location here....." name="location" class="form-control" type="text" value="">
+                <label for="name">ENTER EMAIL</label>
+                <input id="name" placeholder="Enter customer email here....." name="email" class="form-control" type="text" value="">
+            </div>
+            <button type="submit" class="button btn-warning">SUBMIT</button>
+        </form>
+    {{/if}}
+    {{/partial}}
