@@ -86,7 +86,7 @@ public class Sql2oSupplyDaoTest {
         farmerDao.add(farmerA);
         Product productA = new Product("apple");
         productDao.add(productA);
-        supplyDao.update(currentId, farmerA.getId(), productA.getId(), 4, 200);
+        supplyDao.update(currentId, farmerA.getId(), farmerA.getName(), productA.getId(), productA.getName(), 4, 200);
         Supply updatedSupply = supplyDao.findById(currentId);
         assertNotEquals(supply, updatedSupply);
     }
@@ -118,6 +118,6 @@ public class Sql2oSupplyDaoTest {
         farmerDao.add(farmer);
         Product product = new Product("mangoes");
         productDao.add(product);
-        return new Supply(farmer.getId(), product.getId(), 4, 200);
+        return new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 200);
     }
 }

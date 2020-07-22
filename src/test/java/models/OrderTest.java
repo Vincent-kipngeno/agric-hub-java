@@ -20,8 +20,8 @@ public class OrderTest {
     public void setPrice_priceIsSetCorrectly() {
         Order order = setOrder();
         int price = order.getTotalPrice();
-        Supply supply = new Supply(1, 1, 5, 200);
-        Supply otherSupply = new Supply(2, 1, 7, 300);
+        Supply supply = new Supply(1, "kev", 1, "pineaple", 5, 200);
+        Supply otherSupply = new Supply(2,  "kev",1, "pineaple", 7, 300);
         List<Supply> supplies = new ArrayList<Supply>();
         supplies.add(supply);
         supplies.add(otherSupply);
@@ -43,6 +43,18 @@ public class OrderTest {
     }
 
     @Test
+    public void getCustomerName_customerNameIsRetrieved() {
+        Order order = setOrder();
+        assertEquals("kev", order.getCustomerName());
+    }
+
+    @Test
+    public void getProductName_productNameIsRetrieved() {
+        Order order = setOrder();
+        assertEquals("ken", order.getProductName());
+    }
+
+    @Test
     public void getProductId_productIdIsRetrieved() {
         Order order = setOrder();
         assertEquals(1, order.getProductId());
@@ -58,8 +70,8 @@ public class OrderTest {
     public void getTotalPrice_totalPriceIsRetrieved() {
         Order order = setOrder();
         int price = order.getTotalPrice();
-        Supply supply = new Supply(1, 1, 5, 200);
-        Supply otherSupply = new Supply(2, 1, 7, 300);
+        Supply supply = new Supply(1, "kev", 1, "mango", 5, 200);
+        Supply otherSupply = new Supply(2, "kev", 1, "mango", 7, 300);
         List<Supply> supplies = new ArrayList<Supply>();
         supplies.add(supply);
         supplies.add(otherSupply);
@@ -76,11 +88,11 @@ public class OrderTest {
 
     //helpers
     public Order setOrder(){
-        Supply supply = new Supply(1, 1, 5, 200);
-        Supply otherSupply = new Supply(2, 1, 7, 300);
+        Supply supply = new Supply(1, "kev", 1, "mango", 5, 200);
+        Supply otherSupply = new Supply(2, "kev", 1, "mango", 7, 300);
         List<Supply> supplies = new ArrayList<Supply>();
         supplies.add(supply);
         supplies.add(otherSupply);
-        return new Order(1, 1, 4, supplies);
+        return new Order(1, "kev", 1, "ken", 4, supplies);
     }
 }

@@ -5,32 +5,46 @@ import java.util.Objects;
 public class Supply {
     private int id;
     private int farmerId;
+    private String farmerName;
     private int productId;
+    private String productName;
     private int quantity;
     private int price;
 
-    public Supply(int farmerId, int productId, int quantity, int price) {
+    public Supply(int farmerId, String farmerName, int productId, String productName, int quantity, int price) {
         this.farmerId = farmerId;
         this.productId = productId;
         this.quantity = quantity;
         this.price = price;
+        this.farmerName = farmerName;
+        this.productName = productName;
+    }
+
+    public String getFarmerName() {
+        return farmerName;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Supply supply = (Supply) o;
-        return id == supply.id &&
-                farmerId == supply.farmerId &&
-                productId == supply.productId &&
-                quantity == supply.quantity &&
-                price == supply.price;
+        Supply order = (Supply) o;
+        return id == order.id &&
+                farmerId == order.farmerId &&
+                productId == order.productId &&
+                quantity == order.quantity &&
+                price == order.price &&
+                Objects.equals(farmerName, order.farmerName) &&
+                Objects.equals(productName, order.productName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, farmerId, productId, quantity, price);
+        return Objects.hash(id, farmerId, farmerName, productId, productName, quantity, price);
     }
 
     public void setId(int id) {

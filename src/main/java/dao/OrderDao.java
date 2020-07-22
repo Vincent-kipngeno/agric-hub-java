@@ -13,7 +13,7 @@ public interface OrderDao {
     Order findById(int id);
 
     //update
-    void update(int id, int customerId, int productId, int quantity, int price);
+    void update(int id, int customerId, String customerName,int productId, String productName, int quantity, int price);
 
     //delete
     void deleteById(int id);

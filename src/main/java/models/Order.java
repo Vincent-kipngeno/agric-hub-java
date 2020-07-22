@@ -2,20 +2,16 @@ package models;
 
 import java.util.List;
 import java.util.Objects;
+import dao.*;
 
 public class Order {
     private int id;
     private int customerId;
+    private String customerName;
     private int productId;
+    private String productName;
     private int quantity;
     private int price;
-
-    public Order(int customerId, int productId, int quantity, List<Supply> supplies) {
-        this.customerId = customerId;
-        this.productId = productId;
-        this.quantity = quantity;
-        setPrice(supplies);
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -26,12 +22,30 @@ public class Order {
                 customerId == order.customerId &&
                 productId == order.productId &&
                 quantity == order.quantity &&
-                price == order.price;
+                Objects.equals(customerName, order.customerName) &&
+                Objects.equals(productName, order.productName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customerId, productId, quantity, price);
+        return Objects.hash(id, customerId, customerName, productId, productName, quantity);
+    }
+
+    public Order(int customerId, String customerName, int productId, String productName, int quantity, List<Supply> supplies) {
+        this.customerId = customerId;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.customerName = customerName;
+        this.productName = productName;
+        setPrice(supplies);
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 
     public void setId(int id) {
