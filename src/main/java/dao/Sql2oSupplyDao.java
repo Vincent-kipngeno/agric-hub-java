@@ -16,7 +16,7 @@ public class Sql2oSupplyDao implements SupplyDao{
 
     @Override
     public void add(Supply supply) {
-        String sql = "INSERT INTO supplies (farmerid, productid, quantity, price) VALUES (:farmerId, :productId, :quantity, :price);";
+        String sql = "INSERT INTO supplies (farmerid,farmername, productid, productname, quantity, price) VALUES (:farmerId, :farmerName, :productId, :productName, :quantity, :price);";
         try (Connection conn = sql2o.open()) {
             int id = (int) conn.createQuery(sql, true)
                     .bind(supply)
@@ -48,14 +48,16 @@ public class Sql2oSupplyDao implements SupplyDao{
     }
 
     @Override
-    public void update(int id, int farmerId, int productId, int quantity, int price) {
-        String sql = "UPDATE supplies SET (farmerid, productid, quantity, price) = (:farmerId, :productId, :quantity, :price) WHERE id = :id; ";
+    public void update(int id, int farmerId, String farmerName, int productId, String productName, int quantity, int price) {
+        String sql = "UPDATE supplies SET (farmerid, farmername, productid, productname, quantity, price) = (:farmerId, :farmerName, :productId, productName, :quantity, :price) WHERE id = :id; ";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("farmerId", farmerId)
                     .addParameter("productId", productId)
                     .addParameter("quantity", quantity)
                     .addParameter("price", price)
+                    .addParameter("farmerName", farmerName)
+                    .addParameter("productName" ,productName)
                     .addParameter("id", id)
                     .executeUpdate();
         }

@@ -122,8 +122,8 @@ public class Sql2oCustomerDaoTest {
         customerDao.add(customer);
         Product product = new Product("mangoes");
         productDao.add(product);
-        Supply supply = new Supply(farmer.getId(), product.getId(), 4, 100);
-        Supply supply1 = new Supply(farmer.getId(), product.getId(), 6, 100);
+        Supply supply = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 100);
+        Supply supply1 = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 6, 100);
         supplyDao.add(supply);
         supplyDao.add(supply1);
         List<Supply> supplies = new ArrayList<>();

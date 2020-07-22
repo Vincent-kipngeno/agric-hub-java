@@ -119,9 +119,9 @@ public class Sql2oProductDaoTest {
         farmerDao.add(farmer);
         Product product = new Product("mangoes");
         productDao.add(product);
-        Supply supply = new Supply(farmer.getId(), product.getId(), 4, 200);
+        Supply supply = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 200);
         supplyDao.add(supply);
-        Supply anotherSupply = new Supply(farmer.getId(), product.getId(), 4, 600);
+        Supply anotherSupply = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 600);
         supplyDao.add(anotherSupply);
         List<Supply> supplies = productDao.getAllSuppliesByProductId(product.getId());
         assertTrue(supplies.contains(supply));
@@ -137,8 +137,8 @@ public class Sql2oProductDaoTest {
         customerDao.add(customer);
         Product product = new Product("mangoes");
         productDao.add(product);
-        Supply supply = new Supply(farmer.getId(), product.getId(), 4, 100);
-        Supply supply1 = new Supply(farmer.getId(), product.getId(), 6, 100);
+        Supply supply = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 100);
+        Supply supply1 = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 6, 100);
         supplyDao.add(supply);
         supplyDao.add(supply1);
         List<Supply> supplies = new ArrayList<>();

@@ -96,8 +96,8 @@ public class Sql2oOrderDaoTest {
         customerDao.add(customerA);
         Product productA = new Product("pineaple");
         productDao.add(productA);
-        Supply supplyB = new Supply(farmerA.getId(), productA.getId(), 4, 500);
-        Supply supplyD = new Supply(farmerA.getId(), productA.getId(), 6, 900);
+        Supply supplyB = new Supply(farmerA.getId(), farmerA.getName(), productA.getId(), productA.getName(), 4, 500);
+        Supply supplyD = new Supply(farmerA.getId(), farmerA.getName(), productA.getId(), productA.getName(), 6, 900);
         supplyDao.add(supplyB);
         supplyDao.add(supplyD);
         List<Supply> suppliesA = new ArrayList<>();
@@ -138,8 +138,8 @@ public class Sql2oOrderDaoTest {
         customerDao.add(customer);
         Product product = new Product("mangoes");
         productDao.add(product);
-        Supply supply = new Supply(farmer.getId(), product.getId(), 4, 200);
-        Supply supply1 = new Supply(farmer.getId(), product.getId(), 6, 400);
+        Supply supply = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 200);
+        Supply supply1 = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 6, 400);
         supplyDao.add(supply);
         supplyDao.add(supply1);
         List<Supply> supplies = new ArrayList<>();
