@@ -251,13 +251,42 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: display details of a product together with supplies and orders made for that product.
-        //get("/products/:id")
+        get("/products/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int productId = Integer.parseInt(req.params("id"));
+            models.put("product", productDao.findById(productId));
+            models.put("supplies", productDao.getAllSuppliesByProductId(productId));
+            models.put("orders", productDao.getAllOrdersByProductId(productId));
+
+            List<Farmer> farmers = farmerDao.getAll();
+            models.put("farmers", farmers);
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "product-details.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //get: get form to update a product
-        //get("/products/:id/edit")
+        get("/products/:id/edit", (req, resp) -> {
+            Map<String, Object> models = new HashMap<>();
+            int productId = Integer.parseInt(req.params("id"));
+            models.put("editProduct", productDao.findById(productId));
+
+            List<Farmer> farmers = farmerDao.getAll();
+            models.put("farmers", farmers);
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "product-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: update a farmer's details
-        //post("/products/:id")
+        post("/products/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int productId = Integer.parseInt(req.params("id"));
+            String name = req.queryParams("name");
+            productDao.update(productId, name);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
                                 ////Customers
 
