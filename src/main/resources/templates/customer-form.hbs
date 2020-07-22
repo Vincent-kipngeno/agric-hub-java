@@ -1,14 +1,14 @@
 {{#partial "content"}}
-    {{#if editFarmer}}
+    {{#if editCustomer}}
         <h1>EDIT HERE</h1>
         <form class="formstyle" action="/farmers/:id" method="post">
             <div class="form-group">
                 <label for="name">EDIT NAME</label>
-                <input id="name" placeholder="Edit farmer name here....." name="name" class="form-control" type="text" value="{{editFarmer.name}}">
+                <input id="name" placeholder="Edit customer name here....." name="name" class="form-control" type="text" value="{{editCustomer.name}}">
                 <label for="name">EDIT LOCATION</label>
-                <input id="name" placeholder="Edit location here....." name="location" class="form-control" type="text" value="{{editFarmer.location}}">
+                <input id="name" placeholder="Edit customer location here....." name="location" class="form-control" type="text" value="{{editCustomer.location}}">
                 <label for="name">EDIT EMAIL</label>
-                <input id="name" placeholder="Edit farmer email here....." name="email" class="form-control" type="text" value="{{editFarmer.email}}">
+                <input id="name" placeholder="Edit customer email here....." name="email" class="form-control" type="text" value="{{editCustomer.email}}">
             </div>
             <button type="submit" class="button btn-default">EDIT</button>
         </form>
