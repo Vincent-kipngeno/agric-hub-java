@@ -1,7 +1,7 @@
 {{#partial "content"}}
     {{#if editFarmer}}
         <h1>EDIT HERE</h1>
-        <form class="formstyle" action="/animals/{{editFarmer.id}}" method="post">
+        <form class="formstyle" action="/farmers/:id/edit" method="post">
             <div class="form-group">
                 <label for="name">EDIT NAME</label>
                 <input id="name" placeholder="Edit farmer name here....." name="name" class="form-control" type="text" value="{{editFarmer.name}}">
@@ -14,7 +14,7 @@
         </form>
     {{else}}
         <h1>ENTER FARMER CREDENTIALS HERE:</h1>
-        <form class="formstyle" action="/animals" method="post">
+        <form class="formstyle" action="/farmers" method="post">
             <div class="form-group">
                 <label for="name">ENTER NAME</label>
                 <input id="name" placeholder="Enter farmer name here....." name="name" class="form-control" type="text" value="">
