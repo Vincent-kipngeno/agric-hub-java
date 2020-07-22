@@ -408,10 +408,40 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: delete individual order
-        //get("/customers/:customerId/products/:productId/orders/:id/delete")
+        get("/customers/:customerId/products/:productId/orders/:id/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int orderId = Integer.parseInt(req.params("id"));
+            orderDao.deleteById(orderId);
+            res.redirect("/");
+            return  null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: get list of all orders
+        get("/orders", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            models.put("orders", orderDao.getAll());
+
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "orders.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //get: display details of individual orders made with name of customer and product.
-        //get("/customers/:customerId/products/:productId/orders/:id")
+        get("/customers/:customerId/products/:productId/orders/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int orderId = Integer.parseInt(req.params("id"));
+            int customerId = Integer.parseInt(req.params("customerId"));
+            int productId = Integer.parseInt(req.params("productId"));
+            models.put("order", orderDao.findById(orderId));
+            models.put("customer", customerDao.findById(customerId));
+            models.put("product", productDao.findById(productId));
+
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "order-details.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //get: get form to update an order
         //get("/orders/:id/edit")
