@@ -126,46 +126,167 @@ public class App {
 
                          ////Supplies
         //get a form to Create a Supply instance
-        //get("/supplies/new")
+        get("/supplies/new", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "supply-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: Create a Supply instance
-        //post("/supplies")
+        post("/supplies", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int farmerId = Integer.parseInt(req.queryParams("farmerId"));
+            String farmerName = farmerDao.findById(farmerId).getName();
+            int productId = Integer.parseInt(req.queryParams("productId"));
+            String productName = productDao.findById(productId).getName();
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int price = Integer.parseInt(req.queryParams("price"));
+            Supply supply = new Supply(farmerId, farmerName, productId, productName, quantity, price );
+            supplyDao.add(supply);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete individual supply
-        //get("/farmers/:farmerId/products/:productId/supplies/:id/delete")
+        get("/farmers/:farmerId/products/:productId/supplies/:id/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int supplyId = Integer.parseInt(req.params("id"));
+            supplyDao.deleteById(supplyId);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: get list of all supplies
+        get("/supplies", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            models.put("supplies", supplyDao.getAll());
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "supplies.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //get: display details of individual supplies made with name of farmer and product.
-        //get("/farmers/:farmerId/products/:productId/supplies/:id")
+        get("/farmers/:farmerId/products/:productId/supplies/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int supplyId = Integer.parseInt(req.params("id"));
+            int farmerId = Integer.parseInt(req.params("farmerId"));
+            int productId = Integer.parseInt(req.params("productId"));
+            models.put("supply", supplyDao.findById(supplyId));
+            models.put("farmer", farmerDao.findById(farmerId));
+            models.put("product", productDao.findById(productId));
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "supply-details.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //get: get form to update a supply
-        //get("/supplies/:id/edit")
+        get("/supplies/:id/edit", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int supplyId = Integer.parseInt(req.params("id"));
+            models.put("editSupply", supplyDao.findById(supplyId));
+
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "supply-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: update supply details
-        //post("/supplies/:id")
+        post("/supplies/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int supplyId = Integer.parseInt(req.params("id"));
+            int farmerId = Integer.parseInt(req.queryParams("farmerId"));
+            String farmerName = farmerDao.findById(farmerId).getName();
+            int productId = Integer.parseInt(req.queryParams("productId"));
+            String productName = productDao.findById(productId).getName();
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int price = Integer.parseInt(req.queryParams("price"));
+            supplyDao.update(supplyId, farmerId, farmerName, productId, productName, quantity, price);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
 
                         /////Products
 
         //get a form to Create a product instance
-        //get("/products/new")
+        get("/products/new", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "product-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: Create a Product instance
-        //post("/products")
+        post("/products", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            String name = req.queryParams("name");
+            Product product = new Product(name);
+            productDao.add(product);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete all products
-        //get("/products/delete)
+        get("/products/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            productDao.clearAll();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete a product entry together with supplies and orders made for that product and
-        //get("/products/:id/delete")
+        get("/products/:id/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int productId = Integer.parseInt(req.params("id"));
+            productDao.deleteById(productId);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: display details of a product together with supplies and orders made for that product.
-        //get("/products/:id")
+        get("/products/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int productId = Integer.parseInt(req.params("id"));
+            models.put("product", productDao.findById(productId));
+            models.put("supplies", productDao.getAllSuppliesByProductId(productId));
+            models.put("orders", productDao.getAllOrdersByProductId(productId));
+
+            List<Farmer> farmers = farmerDao.getAll();
+            models.put("farmers", farmers);
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "product-details.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //get: get form to update a product
-        //get("/products/:id/edit")
+        get("/products/:id/edit", (req, resp) -> {
+            Map<String, Object> models = new HashMap<>();
+            int productId = Integer.parseInt(req.params("id"));
+            models.put("editProduct", productDao.findById(productId));
+
+            List<Farmer> farmers = farmerDao.getAll();
+            models.put("farmers", farmers);
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "product-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: update a farmer's details
-        //post("/products/:id")
+        post("/products/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int productId = Integer.parseInt(req.params("id"));
+            String name = req.queryParams("name");
+            productDao.update(productId, name);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
                                 ////Customers
 
