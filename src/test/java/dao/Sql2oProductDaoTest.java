@@ -1,6 +1,8 @@
 package dao;
 
+import models.Farmer;
 import models.Product;
+import models.Supply;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -8,10 +10,14 @@ import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class Sql2oProductDaoTest {
     private static Sql2oProductDao productDao;
+    private static Sql2oFarmerDao farmerDao;
+    private static Sql2oSupplyDao supplyDao;
     private static Connection conn;
 
     @BeforeClass
@@ -19,6 +25,8 @@ public class Sql2oProductDaoTest {
         String connectionString = "jdbc:postgresql://localhost:5432/agric_hub_test";
         Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
         productDao = new Sql2oProductDao(sql2o);
+        farmerDao = new Sql2oFarmerDao(sql2o);
+        supplyDao = new Sql2oSupplyDao(sql2o);
         conn = (Connection) sql2o.open();
     }
 
@@ -26,6 +34,8 @@ public class Sql2oProductDaoTest {
     public void tearDown() throws Exception {
         System.out.println("Clearing database");
         productDao.clearAll();
+        farmerDao.clearAll();
+        supplyDao.clearAll();
     }
 
     @AfterClass
@@ -97,6 +107,21 @@ public class Sql2oProductDaoTest {
         productDao.add(otherProduct);
         productDao.clearAll();
         assertEquals(0, productDao.getAll().size());
+    }
+    @Test
+    public void getAllSupplies_allSuppliesMadeForProductCanBeRetrieved() {
+        Farmer farmer = new Farmer("henry", "nike", "hen@gmail.com");
+        farmerDao.add(farmer);
+        Product product = new Product("mangoes");
+        productDao.add(product);
+        Supply supply = new Supply(farmer.getId(), product.getId(), 4, 200);
+        supplyDao.add(supply);
+        Supply anotherSupply = new Supply(farmer.getId(), product.getId(), 4, 600);
+        supplyDao.add(anotherSupply);
+        List<Supply> supplies = productDao.getAllSuppliesByProductId(product.getId());
+        assertTrue(supplies.contains(supply));
+        assertTrue(supplies.contains(anotherSupply));
+        assertEquals(2, supplies.size());
     }
 
     public Product setProduct(){

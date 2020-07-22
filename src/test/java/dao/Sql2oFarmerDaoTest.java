@@ -35,7 +35,7 @@ public class Sql2oFarmerDaoTest {
         System.out.println("Clearing database");
         farmerDao.clearAll();
         productDao.clearAll();
-        farmerDao.clearAll();
+        supplyDao.clearAll();
     }
 
     @AfterClass

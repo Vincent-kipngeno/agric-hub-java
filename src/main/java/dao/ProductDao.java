@@ -1,6 +1,7 @@
 package dao;
 
 import models.Product;
+import models.Supply;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public interface ProductDao {
     //read
     List<Product> getAll();
     Product findById(int id);
+    List<Supply> getAllSuppliesByProductId(int productId);
 
     //update
     void update(int id, String name);
