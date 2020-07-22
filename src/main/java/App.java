@@ -214,16 +214,41 @@ public class App {
                         /////Products
 
         //get a form to Create a product instance
-        //get("/products/new")
+        get("/products/new", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "product-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: Create a Product instance
-        //post("/products")
+        post("/products", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            String name = req.queryParams("name");
+            Product product = new Product(name);
+            productDao.add(product);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete all products
-        //get("/products/delete)
+        get("/products/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            productDao.clearAll();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete a product entry together with supplies and orders made for that product and
-        //get("/products/:id/delete")
+        get("/products/:id/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int productId = Integer.parseInt(req.params("id"));
+            productDao.deleteById(productId);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: display details of a product together with supplies and orders made for that product.
         //get("/products/:id")
