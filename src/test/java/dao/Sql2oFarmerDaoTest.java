@@ -35,7 +35,7 @@ public class Sql2oFarmerDaoTest {
         System.out.println("Clearing database");
         farmerDao.clearAll();
         productDao.clearAll();
-        farmerDao.clearAll();
+        supplyDao.clearAll();
     }
 
     @AfterClass
@@ -115,9 +115,9 @@ public class Sql2oFarmerDaoTest {
         farmerDao.add(farmer);
         Product product = new Product("mangoes");
         productDao.add(product);
-        Supply supply = new Supply(farmer.getId(), product.getId(), 4, 200);
+        Supply supply = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 200);
         supplyDao.add(supply);
-        Supply anotherSupply = new Supply(farmer.getId(), product.getId(), 4, 600);
+        Supply anotherSupply = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 600);
         supplyDao.add(anotherSupply);
         List<Supply> supplies = farmerDao.getAllSuppliesByFarmerId(farmer.getId());
         assertTrue(supplies.contains(supply));

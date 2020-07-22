@@ -39,7 +39,7 @@ public class Sql2oCustomerDaoTest {
         customerDao.clearAll();
         farmerDao.clearAll();
         productDao.clearAll();
-        farmerDao.clearAll();
+        supplyDao.clearAll();
         orderDao.clearAll();
     }
 
@@ -122,16 +122,16 @@ public class Sql2oCustomerDaoTest {
         customerDao.add(customer);
         Product product = new Product("mangoes");
         productDao.add(product);
-        Supply supply = new Supply(farmer.getId(), product.getId(), 4, 100);
-        Supply supply1 = new Supply(farmer.getId(), product.getId(), 6, 100);
+        Supply supply = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 4, 100);
+        Supply supply1 = new Supply(farmer.getId(), farmer.getName(), product.getId(), product.getName(), 6, 100);
         supplyDao.add(supply);
         supplyDao.add(supply1);
         List<Supply> supplies = new ArrayList<>();
         supplies.add(supply);
         supplies.add(supply1);
-        Order order = new Order (customer.getId(), product.getId(), 4, supplies);
+        Order order = new Order (customer.getId(), customer.getName(), product.getId(), product.getName(), 4, supplies);
         orderDao.add(order);
-        Order anotherOrder = new Order (customer.getId(), product.getId(), 4, supplies);
+        Order anotherOrder = new Order (customer.getId(), customer.getName(), product.getId(), product.getName(), 4, supplies);
         orderDao.add(anotherOrder);
         List<Order> orders = customerDao.getAllOrdersByCustomerId(customer.getId());
         assertTrue(orders.contains(order));
