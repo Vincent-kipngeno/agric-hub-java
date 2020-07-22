@@ -170,7 +170,7 @@ public class App {
                                 ////Customers
 
         //get a form to Create a Customer instance (Customer makes the order of farm products)
-        //get("/customers/new")
+
         get("/customers/new", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
             List<Customer> customers = customerDao.getAll();
@@ -181,6 +181,17 @@ public class App {
 
         //post: Create a customer instance
         //post("/customers")
+        post("/customers", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            String name = req.queryParams("name");
+            String location = req.queryParams("location");
+            String email = req.queryParams("email");
+            Farmer farmer = new Farmer(name, location, email);
+            farmerDao.add(farmer);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
 
         //get: delete all customers
         //get("/customers/delete)
