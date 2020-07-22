@@ -171,6 +171,13 @@ public class App {
 
         //get a form to Create a Customer instance (Customer makes the order of farm products)
         //get("/customers/new")
+        get("/customers/new", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            List<Customer> customers = customerDao.getAll();
+            models.put("customer", customers);
+            models.put("customers", customerDao.getAll());
+            return new ModelAndView(models, "customer-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: Create a customer instance
         //post("/customers")
