@@ -383,10 +383,29 @@ public class App {
                                 ////orders
 
         //get a form to Create an order instance
-        //get("/orders/new")
+        get("/orders/new", (request, response) -> {
+           Map<String, Object> models = new HashMap<>();
+
+           models.put("farmers", farmerDao.getAll());
+           models.put("customers", customerDao.getAll());
+           models.put("products", productDao.getAll());
+           return new ModelAndView(models, "order-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: Create an order instance
-        //post("/orders")
+        post("/orders", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int customerId = Integer.parseInt(req.queryParams("customerId"));
+            String customerName = customerDao.findById(customerId).getName();
+            int productId = Integer.parseInt(req.queryParams("productId"));
+            String productName = productDao.findById(productId).getName();
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            List<Supply> supplies = productDao.getAllSuppliesByProductId(productId);
+            Order order = new Order(customerId, customerName, productId, productName, quantity, supplies);
+            orderDao.add(order);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete individual order
         //get("/customers/:customerId/products/:productId/orders/:id/delete")
