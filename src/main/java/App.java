@@ -230,14 +230,24 @@ public class App {
             models.put("orders", customerDao.getAllOrdersByCustomerId(customerId));
             List<Customer> customers = customerDao.getAll();
             models.put("customers", customers);
-            models.put("farmers", customerDao.getAll());
+            models.put("customers", customerDao.getAll());
             models.put("orders", orderDao.getAll());
             return new ModelAndView(models, "customer-details.hbs");
         }, new HandlebarsTemplateEngine());
 
 
         //get: get form to update a customer
-        //get("/customers/:id/edit")
+
+        get("/customers/:id/edit", (req, resp) -> {
+            Map<String, Object> models = new HashMap<>();
+            int customerId = Integer.parseInt(req.params("id"));
+            models.put("editCustomer", customerDao.findById(customerId));
+            List<Customer> customers = customerDao.getAll();
+            models.put("customers", customers);
+            models.put("farmers", farmerDao.getAll());
+            models.put("orders", orderDao.getAll());
+            return new ModelAndView(models, "customer-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: update a customer's details
         //post("/customers/:id")
