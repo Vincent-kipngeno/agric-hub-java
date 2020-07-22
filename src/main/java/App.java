@@ -184,10 +184,31 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: get form to update a supply
-        //get("/supplies/:id/edit")
+        get("/supplies/:id/edit", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int supplyId = Integer.parseInt(req.params("id"));
+            models.put("editSupply", supplyDao.findById(supplyId));
+
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "supply-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: update supply details
-        //post("/supplies/:id")
+        post("/supplies/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int supplyId = Integer.parseInt(req.params("id"));
+            int farmerId = Integer.parseInt(req.queryParams("farmerId"));
+            String farmerName = farmerDao.findById(farmerId).getName();
+            int productId = Integer.parseInt(req.queryParams("productId"));
+            String productName = productDao.findById(productId).getName();
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int price = Integer.parseInt(req.queryParams("price"));
+            supplyDao.update(supplyId, farmerId, farmerName, productId, productName, quantity, price);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
 
                         /////Products
