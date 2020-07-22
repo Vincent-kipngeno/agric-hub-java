@@ -9,8 +9,21 @@
                     {{/each}}
                 </select>
             </div>
-            <div class="form-group"></div>
-            <div class="form-group"></div>
+            <div class="form-group">
+                <label for="product">Select product from farmer</label>
+                <select id="product" name="product">
+                    {{#each product}}
+                        <option value = {{id}}>{{name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Enter quantity of product</label>
+                <input type="text" id="quantity" class="quantity" placeholder="Quantity">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-success">Submit</button>
+            </div>
         </form>
     </div>
 {{/partial}}
