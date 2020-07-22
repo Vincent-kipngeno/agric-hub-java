@@ -194,7 +194,13 @@ public class App {
 
 
         //get: delete all customers
-        //get("/customers/delete)
+
+        get("/customers/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            customerDao.clearAll();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete a customer entry together with orders made by the customer
         //get("/customers/:id/delete")
