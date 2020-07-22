@@ -221,7 +221,20 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: display details of a customer together with orders made by the customer.
-        //get("/customers/:id")
+
+        get("/customers/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int customerId = Integer.parseInt(req.params("id"));
+            Customer customerToFind = customerDao.findById(customerId);
+            models.put("customer", customerToFind);
+            models.put("orders", customerDao.getAllOrdersByCustomerId(customerId));
+            List<Customer> customers = customerDao.getAll();
+            models.put("customers", customers);
+            models.put("farmers", customerDao.getAll());
+            models.put("orders", orderDao.getAll());
+            return new ModelAndView(models, "customer-details.hbs");
+        }, new HandlebarsTemplateEngine());
+
 
         //get: get form to update a customer
         //get("/customers/:id/edit")
