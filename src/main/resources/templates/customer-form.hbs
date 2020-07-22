@@ -1,2 +1,15 @@
 {{#partial "content"}}
+    {{#if editFarmer}}
+        <h1>EDIT HERE</h1>
+        <form class="formstyle" action="/farmers/:id" method="post">
+            <div class="form-group">
+                <label for="name">EDIT NAME</label>
+                <input id="name" placeholder="Edit farmer name here....." name="name" class="form-control" type="text" value="{{editFarmer.name}}">
+                <label for="name">EDIT LOCATION</label>
+                <input id="name" placeholder="Edit location here....." name="location" class="form-control" type="text" value="{{editFarmer.location}}">
+                <label for="name">EDIT EMAIL</label>
+                <input id="name" placeholder="Edit farmer email here....." name="email" class="form-control" type="text" value="{{editFarmer.email}}">
+            </div>
+            <button type="submit" class="button btn-default">EDIT</button>
+        </form>
     {{/partial}}
