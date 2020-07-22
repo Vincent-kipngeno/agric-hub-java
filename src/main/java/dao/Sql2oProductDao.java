@@ -1,5 +1,6 @@
 package dao;
 
+import models.Order;
 import models.Product;
 import models.Supply;
 import org.sql2o.Connection;
@@ -85,6 +86,16 @@ public class Sql2oProductDao implements ProductDao {
             return conn.createQuery(sql)
                     .addParameter("productId", productId)
                     .executeAndFetch(Supply.class);
+        }
+    }
+
+    @Override
+    public List<Order> getAllOrdersByProductId(int productId) {
+        String sql = "SELECT * FROM orders WHERE productid = :productId;";
+        try(Connection conn = sql2o.open()) {
+            return conn.createQuery(sql)
+                    .addParameter("productId", productId)
+                    .executeAndFetch(Order.class);
         }
     }
 }

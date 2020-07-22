@@ -39,7 +39,7 @@ public class Sql2oCustomerDaoTest {
         customerDao.clearAll();
         farmerDao.clearAll();
         productDao.clearAll();
-        farmerDao.clearAll();
+        supplyDao.clearAll();
         orderDao.clearAll();
     }
 
