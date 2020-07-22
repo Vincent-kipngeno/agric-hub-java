@@ -3,3 +3,7 @@
     background-size: cover;
     background-repeat: none;
 }
+
+.jumbotron {
+    background: none
+}
