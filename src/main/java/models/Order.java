@@ -13,6 +13,24 @@ public class Order {
     private int quantity;
     private int price;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return id == order.id &&
+                customerId == order.customerId &&
+                productId == order.productId &&
+                quantity == order.quantity &&
+                Objects.equals(customerName, order.customerName) &&
+                Objects.equals(productName, order.productName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, customerId, customerName, productId, productName, quantity);
+    }
+
     public Order(int customerId, String customerName, int productId, String productName, int quantity, List<Supply> supplies) {
         this.customerId = customerId;
         this.productId = productId;
@@ -28,22 +46,6 @@ public class Order {
 
     public String getProductName() {
         return productName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return id == order.id &&
-                customerId == order.customerId &&
-                productId == order.productId &&
-                quantity == order.quantity;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, customerId, productId, quantity);
     }
 
     public void setId(int id) {

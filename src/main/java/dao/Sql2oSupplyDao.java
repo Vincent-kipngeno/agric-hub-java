@@ -49,7 +49,7 @@ public class Sql2oSupplyDao implements SupplyDao{
 
     @Override
     public void update(int id, int farmerId, String farmerName, int productId, String productName, int quantity, int price) {
-        String sql = "UPDATE supplies SET (farmerid, farmername, productid, productname, quantity, price) = (:farmerId, :farmerName, :productId, productName, :quantity, :price) WHERE id = :id; ";
+        String sql = "UPDATE supplies SET (farmerid, farmername, productid, productname, quantity, price) = (:farmerId, :farmerName, :productId, :productName, :quantity, :price) WHERE id = :id; ";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("farmerId", farmerId)
