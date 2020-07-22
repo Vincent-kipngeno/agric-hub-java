@@ -291,17 +291,17 @@ public class App {
                                 ////Customers
 
         //get a form to Create a Customer instance (Customer makes the order of farm products)
-
         get("/customers/new", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
-            List<Customer> customers = customerDao.getAll();
-            models.put("customer", customers);
+                //refresh navbar links
+            models.put("farmers", farmerDao.getAll());
             models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+
             return new ModelAndView(models, "customer-form.hbs");
         }, new HandlebarsTemplateEngine());
 
         //post: Create a customer instance
-        //post("/customers")
         post("/customers", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
             String name = req.queryParams("name");
@@ -315,7 +315,6 @@ public class App {
 
 
         //get: delete all customers
-
         get("/customers/delete", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
             customerDao.clearAll();
@@ -324,7 +323,6 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: delete a customer entry together with orders made by the customer
-
         get("/customers/:id/delete", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
             int customerId = Integer.parseInt(req.params("id"));
@@ -342,31 +340,31 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: display details of a customer together with orders made by the customer.
-
         get("/customers/:id", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
             int customerId = Integer.parseInt(req.params("id"));
             Customer customerToFind = customerDao.findById(customerId);
             models.put("customer", customerToFind);
             models.put("orders", customerDao.getAllOrdersByCustomerId(customerId));
+
             List<Customer> customers = customerDao.getAll();
             models.put("customers", customers);
             models.put("farmers", farmerDao.getAll());
-            models.put("orders", orderDao.getAll());
+            models.put("products", productDao.getAll());
             return new ModelAndView(models, "customer-details.hbs");
         }, new HandlebarsTemplateEngine());
 
 
         //get: get form to update a customer
-
         get("/customers/:id/edit", (req, resp) -> {
             Map<String, Object> models = new HashMap<>();
             int customerId = Integer.parseInt(req.params("id"));
             models.put("editCustomer", customerDao.findById(customerId));
+
             List<Customer> customers = customerDao.getAll();
             models.put("customers", customers);
             models.put("farmers", farmerDao.getAll());
-            models.put("orders", orderDao.getAll());
+            models.put("products", productDao.getAll());
             return new ModelAndView(models, "customer-form.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -385,21 +383,91 @@ public class App {
                                 ////orders
 
         //get a form to Create an order instance
-        //get("/orders/new")
+        get("/orders/new", (request, response) -> {
+           Map<String, Object> models = new HashMap<>();
+
+           models.put("farmers", farmerDao.getAll());
+           models.put("customers", customerDao.getAll());
+           models.put("products", productDao.getAll());
+           return new ModelAndView(models, "order-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: Create an order instance
-        //post("/orders")
+        post("/orders", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int customerId = Integer.parseInt(req.queryParams("customerId"));
+            String customerName = customerDao.findById(customerId).getName();
+            int productId = Integer.parseInt(req.queryParams("productId"));
+            String productName = productDao.findById(productId).getName();
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            List<Supply> supplies = productDao.getAllSuppliesByProductId(productId);
+            Order order = new Order(customerId, customerName, productId, productName, quantity, supplies);
+            orderDao.add(order);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete individual order
-        //get("/customers/:customerId/products/:productId/orders/:id/delete")
+        get("/customers/:customerId/products/:productId/orders/:id/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int orderId = Integer.parseInt(req.params("id"));
+            orderDao.deleteById(orderId);
+            res.redirect("/");
+            return  null;
+        }, new HandlebarsTemplateEngine());
+
+        //get: get list of all orders
+        get("/orders", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            models.put("orders", orderDao.getAll());
+
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "orders.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //get: display details of individual orders made with name of customer and product.
-        //get("/customers/:customerId/products/:productId/orders/:id")
+        get("/customers/:customerId/products/:productId/orders/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int orderId = Integer.parseInt(req.params("id"));
+            int customerId = Integer.parseInt(req.params("customerId"));
+            int productId = Integer.parseInt(req.params("productId"));
+            models.put("order", orderDao.findById(orderId));
+            models.put("customer", customerDao.findById(customerId));
+            models.put("product", productDao.findById(productId));
+
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "order-details.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //get: get form to update an order
-        //get("/orders/:id/edit")
+        get("/orders/:id/edit", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int orderId = Integer.parseInt(req.params("id"));
+            models.put("editOrder", orderDao.findById(orderId));
+
+            models.put("farmers", farmerDao.getAll());
+            models.put("customers", customerDao.getAll());
+            models.put("products", productDao.getAll());
+            return new ModelAndView(models, "order-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
         //post: update order details
-        //post("/orders/:id")
+        post("/orders/:id", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            int orderId = Integer.parseInt(req.params("id"));
+            int customerId = Integer.parseInt(req.queryParams("customerId"));
+            String customerName = customerDao.findById(customerId).getName();
+            int productId = Integer.parseInt(req.queryParams("productId"));
+            String productName = productDao.findById(productId).getName();
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            List<Supply> supplies = productDao.getAllSuppliesByProductId(productId);
+            orderDao.update(orderId, customerId, customerName, productId, productName, quantity, 100);
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
     }
 }
