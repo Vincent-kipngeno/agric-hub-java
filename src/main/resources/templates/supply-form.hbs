@@ -30,38 +30,45 @@
             <button type="submit" class="button btn-default">EDIT</button>
         </form>
     {{else}}
+        {{#if farmers}}
+            {{#if products}}
+                <form action="/supplies">
+                    <h1>Fill in the supply form</h1>
 
-        <form action="/supplies">
-            <h1>Fill in the supply form</h1>
-
-            <div class="form-group">
-                <label for="farmers">Select farmer</label>
-                <select id="farmers" name="farmers">
-                    {{#each farmers}}
-                        <option value ="{{id}}">{{name}}</option>
-                    {{/each}}
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="product">Select product from farmer</label>
-                <select id="product" name="product">
-                    {{#each product}}
-                        <option value ="{{id}}">{{name}}</option>
-                    {{/each}}
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="quantity">Enter quantity of product</label>
-                <input type="text" id="quantity" class="quantity form-control" placeholder="Quantity">
-            </div>
-            <div class="form-group">
-                <label for="price">Enter price of product</label>
-                <input type="text" id="price" class="quantity form-control" placeholder="Price">
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-outline-success">Submit</button>
-            </div>
-        </form>
+                    <div class="form-group">
+                        <label for="farmers">Select farmer</label>
+                        <select id="farmers" name="farmers">
+                            {{#each farmers}}
+                                <option value ="{{id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product">Select product from farmer</label>
+                        <select id="product" name="product">
+                            {{#each product}}
+                                <option value ="{{id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Enter quantity of product</label>
+                        <input type="text" id="quantity" class="quantity form-control" placeholder="Quantity">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Enter price of product</label>
+                        <input type="text" id="price" class="quantity form-control" placeholder="Price">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-success">Submit</button>
+                    </div>
+                </form>
+            {{else}}
+                <h2>Sorry there are no products yet. Please add a product before you make a supply. <a class="btn btn-success" href="/products/new">Add one here.</a></h2>
+            {{/if}}
+        {{else}}
+            <h2>Sorry there are no farmers yet. Please add a farmer before you make a supply. <a class="btn btn-success" href="/farmers/new">Add one here.</a></h2>
+        {{/if}}
     {{/if}}
     </div>
 {{/partial}}
