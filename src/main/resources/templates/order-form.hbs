@@ -1,60 +1,67 @@
 {{#partial "content"}}
-    {{#if editOrder}}
-        <h1>EDIT HERE</h1>
-        <form class="form" action="/orders/:id" method="post">
-            <div class="form-group">
-                <label for="customerId">Select customer:</label>
-                <select name="customerId" class="form-control" id="customerId"></select>
-                {{#each customers}}
-                    <option value="{{id}}"> {{name}} </option>
-                {{/each}}
-            </div>
-            <div class="form-group">
-                <label for="productId">Select product:</label>
-                <select name="productId" class="form-control" id="productId"></select>
-                {{#each products}}
-                    <option value="{{id}}"> {{name}} </option>
-                {{/each}}
-            </div>
-            <div>
-                <label for="quantity">Enter quantity:</label>
-                <input class="form-control" type="number" name="quantity" value="{{editOrder.quantity}}" id="quantity">
-            </div>
-            <button type="submit" class="button btn-default">EDIT</button>
-        </form>
-    {{else}}
-        {{#if customers}}
-            {{#if products}}
-                <h1>ENTER ORDER CREDENTIALS:</h1>
-                <form class="form" action="/orders" method="post">
-                    <div class="form-group">
-                        <label for="customerId">Select customer:</label>
-                        <select name="customerId" class="form-control" id="customerId">
+    <div class="r-supplyform " class="r-formContainer">
+        {{#if editOrder}}
+            <h1>EDIT HERE</h1>
+            <form class="form" action="/orders/{{editOrder.id}}" method="post">
+                <div class="form-group">
+                    <label for="customerId">Select customer:</label>
+                    <select name="customerId" class="form-control" id="customerId">
                         {{#each customers}}
                             <option value="{{id}}"> {{name}} </option>
                         {{/each}}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="productId">Select product:</label>
-                        <select name="productId" class="form-control" id="productId">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productId">Select product:</label>
+                    <select name="productId" class="form-control" id="productId">
                         {{#each products}}
-                            <option value="{{id}}">{{name}} </option>
+                            <option value="{{id}}"> {{name}} </option>
                         {{/each}}
-                        </select>
-                    </div>
-                    <div>
-                        <label for="quantity">Enter quantity:</label>
-                        <input class="form-control" type="number" name="quantity" id="quantity">
-                    </div>
-                    <button type="submit" class="button btn-default">SUBMIT</button>
-                </form>
-            {{else}}
-                <p>Sorry there are no products yet. Apologies for the inconveniences caused, we will reach out to you once they are supplied.</p>
-            {{/if}}
+                    </select>
+                </div>
+                <div>
+                    <label for="quantity">Enter quantity:</label>
+                    <input class="form-control" type="number" name="quantity" value="{{editOrder.quantity}}" id="quantity">
+                </div>
+                <p>Don't see the right customer or product ? <a class="btn btn-success" href="/customers/new">Add Customer</a><a class="btn btn-success" href="/products/new">Add product</a></p>
+                <button type="submit" class="btn btn-success">EDIT</button>
+            </form>
         {{else}}
-           <p>Sorry you cannot place an order without customers. Please Add a customer first. <a href="/customers/new">Add one here.</a></p>
+            {{#if customers}}
+                {{#if supplies}}
+                    <h1>ENTER ORDER CREDENTIALS:</h1>
+                    <form class="form" action="/orders" method="post">
+                        <div class="form-group">
+                            <label for="customerId">Select customer:</label>
+                            <select name="customerId" class="form-control" id="customerId">
+                                {{#each customers}}
+                                    <option value="{{id}}"> {{name}} </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productId">Select product:</label>
+                            <select name="productId" class="form-control" id="productId">
+                                {{#each products}}
+                                    <option value="{{id}}">{{name}} </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div>
+                            <label for="quantity">Enter quantity:</label>
+                            <input class="form-control" type="number" name="quantity" id="quantity">
+                        </div>
+                        <p>Don't see the right customer or product ? <a class="btn btn-success" href="/customers/new">Add Customer</a><a class="btn btn-success" href="/products/new">Add product</a></p>
+                        <button type="submit" class="btn btn-success">SUBMIT</button>
+
+                    </form>
+                {{else}}
+                    <p>Sorry there are no products yet. Apologies for the inconveniences caused, we will reach out to you once they are supplied.</p>
+                {{/if}}
+            {{else}}
+                <p>Sorry you cannot place an order without customers. Please Add a customer first. <a href="/customers/new">Add one here.</a></p>
+            {{/if}}
         {{/if}}
-    {{/if}}
+    </div>
 {{/partial}}
 {{> layout.hbs}}

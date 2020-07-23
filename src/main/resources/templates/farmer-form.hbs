@@ -1,38 +1,40 @@
 {{#partial "content"}}
-    {{#if editFarmer}}
-        <h1>EDIT HERE</h1>
-        <form class="formstyle" action="/farmers/:id" method="post">
-            <div class="form-group">
-                <label for="name">EDIT NAME</label>
-                <input id="name" placeholder="Edit farmer name here....." name="name" class="form-control" type="text" value="{{editFarmer.name}}">
-            </div>
-            <div class="form-group">
-                <label for="location">EDIT LOCATION</label>
-                <input id="location" placeholder="Edit location here....." name="location" class="form-control" type="text" value="{{editFarmer.location}}">
-            </div>
-            <div class="form-group">
-                <label for="email">EDIT EMAIL</label>
-                <input id="email" placeholder="Edit farmer email here....." name="email" class="form-control" type="email" value="{{editFarmer.email}}">
-            </div>
-            <button type="submit" class="button btn-default">EDIT</button>
-        </form>
-    {{else}}
-        <h1>ENTER FARMER CREDENTIALS HERE:</h1>
-        <form class="formstyle" action="/farmers" method="post">
-            <div class="form-group">
-                <label for="name">ENTER NAME</label>
-                <input id="name" placeholder="Enter farmer name here....." name="name" class="form-control" type="text" value="">
-            </div>
-            <div class="form-group">
-                <label for="location">ENTER LOCATION</label>
-                <input id="location" placeholder="Enter location here....." name="location" class="form-control" type="text" value="">
-            </div>
-            <div class="form-group">
-                <label for="email">ENTER EMAIL</label>
-                <input id="email" placeholder="Enter farmer email here....." name="email" class="form-control" type="email" value="">
-            </div>
-            <button type="submit" class="button btn-warning">SUBMIT</button>
-        </form>
-    {{/if}}
+    <div class="r-supplyform " class="r-formContainer">
+        {{#if editFarmer}}
+            <h1>EDIT HERE</h1>
+            <form class="formstyle" action="/farmers/{{editFarmer.id}}" method="post">
+                <div class="form-group">
+                    <label for="name">EDIT NAME</label>
+                    <input id="name" placeholder="Edit farmer name here....." name="name" class="form-control" type="text" value="{{editFarmer.name}}">
+                </div>
+                <div class="form-group">
+                    <label for="location">EDIT LOCATION</label>
+                    <input id="location" placeholder="Edit location here....." name="location" class="form-control" type="text" value="{{editFarmer.location}}">
+                </div>
+                <div class="form-group">
+                    <label for="email">EDIT EMAIL</label>
+                    <input id="email" placeholder="Edit farmer email here....." name="email" class="form-control" type="email" value="{{editFarmer.email}}">
+                </div>
+                <button type="submit" class="btn btn-success">EDIT</button>
+            </form>
+        {{else}}
+            <h1>ENTER FARMER CREDENTIALS HERE:</h1>
+            <form class="formstyle" action="/farmers" method="post">
+                <div class="form-group">
+                    <label for="name">ENTER NAME</label>
+                    <input id="name" placeholder="Enter farmer name here....." name="name" class="form-control" type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="location">ENTER LOCATION</label>
+                    <input id="location" placeholder="Enter location here....." name="location" class="form-control" type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="email">ENTER EMAIL</label>
+                    <input id="email" placeholder="Enter farmer email here....." name="email" class="form-control" type="email" value="">
+                </div>
+                <button type="submit" class="button btn-success">SUBMIT</button>
+            </form>
+        {{/if}}
+    </div>
     {{/partial}}
 {{> layout.hbs}}

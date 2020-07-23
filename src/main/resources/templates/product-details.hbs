@@ -1,6 +1,7 @@
 {{#partial "content"}}
     <div class="row">
         <div class="col-md-6">
+<<<<<<< HEAD
             <div class="Prod">
                 <p>PRODUCTS AVAILABLE:</p>
                 {{#each products}}
@@ -11,6 +12,54 @@
 
                 {{/each}}
                 <hr>
+=======
+            <div class="Details">
+                <h1>{{product.name}}</h1>
+                <div class="">
+                   <div class="">
+                       <table>
+                           <caption><h2 style="text-align:center;">Supplies Made </h2></caption>
+                           <tr>
+                               <th> Farmer </th>
+                               <th> Product </th>
+                               <th> Quantity </th>
+                           </tr>
+                           {{#each supplies}}
+                               <tr>
+                                   <td>{{farmerName}}</td>
+                                   <td>{{productName}}</td>
+                                   <td>{{quantity}}</td>
+                               </tr>
+                           {{/each}}
+                       </table>
+                   </div>
+                    <div class="">
+                        <table>
+                            <caption><h2 style="text-align:center;">Orders Made </h2></caption>
+                            <tr>
+                                <th> Customer </th>
+                                <th> Product </th>
+                                <th> Quantity </th>
+                            </tr>
+                            {{#each orders}}
+                                <tr>
+                                    <td>{{customerName}}</td>
+                                    <td>{{productName}}</td>
+                                    <td>{{quantity}}</td>
+                                </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class = "col-md-12">
+                            <a class="btn btn-warning" href="/products/{{product.id}}/edit">Edit</a>
+                            <a class="btn btn-warning" href="/products/{{product.id}}/delete">DELETE</a>
+                        </div>
+                    </div>
+                </div>
+>>>>>>> 0e0ddf21ba6cd01861d44b94735ac8513e242fd9
             </div>
         </div>
     </div>

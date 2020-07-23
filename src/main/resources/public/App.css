@@ -1,0 +1,120 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+html, body{
+        overflow-x: hidden;
+    }
+    .intro-2 {
+        background: url("https://mdbootstrap.com/img/Photos/Others/img (51).jpg") rgba(0, 0, 0, 0.5) no-repeat center center;
+        background-size: cover;
+        text-align: center;
+        color: white;
+        background-blend-mode: multiply;
+    }
+    .hero-card:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     }
+    a:hover {
+        text-decoration: none;
+    }
+    .view {
+        margin-top: 50px;
+        padding-top: 20px;
+    }
+    .navbar {
+        z-index: 1;
+    }
+    .view {
+        height: 40vh;
+    }
+    div.polaroid {
+        margin-bottom: 20px;
+        maximum-width: 100%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    div.container {
+        padding: 10px;
+    }
+    .card-footer{
+        background-color: black;
+        padding-bottom: 20%;
+    }
+
+    .btn, .button {
+        margin: 8px;
+    }
+
+
+
+.r-index{
+    background: url('/images/index.jpg') rgba(0, 0, 0, 0.5) no-repeat center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    background-blend-mode: multiply;
+}
+
+.jumbotron {
+    background: none
+}
+
+.hero-card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ }
+a:hover {
+    text-decoration: none;
+}
+
+.r-supplyform{
+    background: url('/images/supply.jpg') rgba(0, 0, 0, 0.5) no-repeat center center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    background-blend-mode: multiply;
+}
+
+.r-formContainer{
+    position: absolute;
+    right: 0;
+    margin: 20px;
+    max-width: 500px;
+    padding: 16px;
+    background-color: white;
+}
+@keyframes rotate {
+	100% {
+		transform: rotate(1turn);
+	}
+}
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+
+
+ nav{
+    /* This section calls the slideInFromLeft animation we defined above */
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+
+    /* background: #333; */
+    padding: 30px;
+  }
+

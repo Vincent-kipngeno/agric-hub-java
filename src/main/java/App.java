@@ -13,6 +13,8 @@ import static spark.Spark.*;
 
 public class App {
     public static void main(String[] args) {
+        staticFileLocation("/public");
+
         Sql2oOrderDao orderDao;
         Sql2oSupplyDao supplyDao;
         Sql2oFarmerDao farmerDao;
@@ -21,7 +23,7 @@ public class App {
         Connection conn;
 
         String connectionString = "jdbc:postgresql://localhost:5432/agric_hub";
-        Sql2o sql2o = new Sql2o(connectionString, "maureenbett", "kenyan082bett");
+        Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
         orderDao = new Sql2oOrderDao(sql2o);
         supplyDao = new Sql2oSupplyDao(sql2o);
         farmerDao = new Sql2oFarmerDao(sql2o);
@@ -61,6 +63,17 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        //get: delete all entries
+        get("/all/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            farmerDao.clearAll();
+            supplyDao.clearAll();
+            productDao.clearAll();
+            customerDao.clearAll();
+            orderDao.clearAll();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete all farmers
         get("/farmers/delete", (req, res) -> {
@@ -102,7 +115,7 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: get form to update a farmer
-        get("/farmers/:id/edit", (req, resp) -> {
+        get("/farmers/:id/edit", (req, res) -> {
            Map<String, Object> models = new HashMap<>();
            int farmerId = Integer.parseInt(req.params("id"));
            models.put("editFarmer", farmerDao.findById(farmerId));
@@ -112,6 +125,7 @@ public class App {
            models.put("products", productDao.getAll());
            return new ModelAndView(models, "farmer-form.hbs");
         }, new HandlebarsTemplateEngine());
+
         //post: update a farmer's details
         post("/farmers/:id", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
@@ -137,9 +151,9 @@ public class App {
         //post: Create a Supply instance
         post("/supplies", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
-            int farmerId = Integer.parseInt(req.queryParams("farmerId"));
+            int farmerId = Integer.parseInt(req.queryParams("farmers"));
             String farmerName = farmerDao.findById(farmerId).getName();
-            int productId = Integer.parseInt(req.queryParams("productId"));
+            int productId = Integer.parseInt(req.queryParams("product"));
             String productName = productDao.findById(productId).getName();
             int quantity = Integer.parseInt(req.queryParams("quantity"));
             int price = Integer.parseInt(req.queryParams("price"));
@@ -356,7 +370,7 @@ public class App {
 
 
         //get: get form to update a customer
-        get("/customers/:id/edit", (req, resp) -> {
+        get("/customers/:id/edit", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
             int customerId = Integer.parseInt(req.params("id"));
             models.put("editCustomer", customerDao.findById(customerId));
@@ -386,6 +400,7 @@ public class App {
         get("/orders/new", (request, response) -> {
            Map<String, Object> models = new HashMap<>();
 
+           models.put("supplies", supplyDao.getAll());
            models.put("farmers", farmerDao.getAll());
            models.put("customers", customerDao.getAll());
            models.put("products", productDao.getAll());
