@@ -21,7 +21,7 @@ public class App {
         Connection conn;
 
         String connectionString = "jdbc:postgresql://localhost:5432/agric_hub";
-        Sql2o sql2o = new Sql2o(connectionString, "maureenbett", "kenyan082bett");
+        Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
         orderDao = new Sql2oOrderDao(sql2o);
         supplyDao = new Sql2oSupplyDao(sql2o);
         farmerDao = new Sql2oFarmerDao(sql2o);
@@ -138,9 +138,9 @@ public class App {
         //post: Create a Supply instance
         post("/supplies", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
-            int farmerId = Integer.parseInt(req.queryParams("farmerId"));
+            int farmerId = Integer.parseInt(req.queryParams("farmers"));
             String farmerName = farmerDao.findById(farmerId).getName();
-            int productId = Integer.parseInt(req.queryParams("productId"));
+            int productId = Integer.parseInt(req.queryParams("product"));
             String productName = productDao.findById(productId).getName();
             int quantity = Integer.parseInt(req.queryParams("quantity"));
             int price = Integer.parseInt(req.queryParams("price"));
@@ -387,6 +387,7 @@ public class App {
         get("/orders/new", (request, response) -> {
            Map<String, Object> models = new HashMap<>();
 
+           models.put("supplies", supplyDao.getAll());
            models.put("farmers", farmerDao.getAll());
            models.put("customers", customerDao.getAll());
            models.put("products", productDao.getAll());

@@ -4,17 +4,19 @@
         <form class="form" action="/orders/{{editOrder.id}}" method="post">
             <div class="form-group">
                 <label for="customerId">Select customer:</label>
-                <select name="customerId" class="form-control" id="customerId"></select>
-                {{#each customers}}
-                    <option value="{{id}}"> {{name}} </option>
-                {{/each}}
+                <select name="customerId" class="form-control" id="customerId">
+                    {{#each customers}}
+                        <option value="{{id}}"> {{name}} </option>
+                    {{/each}}
+                </select>
             </div>
             <div class="form-group">
                 <label for="productId">Select product:</label>
-                <select name="productId" class="form-control" id="productId"></select>
-                {{#each products}}
-                    <option value="{{id}}"> {{name}} </option>
-                {{/each}}
+                <select name="productId" class="form-control" id="productId">
+                    {{#each products}}
+                        <option value="{{id}}"> {{name}} </option>
+                    {{/each}}
+                </select>
             </div>
             <div>
                 <label for="quantity">Enter quantity:</label>
@@ -25,7 +27,7 @@
         </form>
     {{else}}
         {{#if customers}}
-            {{#if products}}
+            {{#if supplies}}
                 <h1>ENTER ORDER CREDENTIALS:</h1>
                 <form class="form" action="/orders" method="post">
                     <div class="form-group">
@@ -49,7 +51,7 @@
                         <input class="form-control" type="number" name="quantity" id="quantity">
                     </div>
                     <p>Don't see the right customer or product ? <a class="btn btn-success" href="/customers/new">Add Customer</a><a class="btn btn-success" href="/products/new">Add product</a></p>
-                    <button type="submit" class="button btn-default">EDIT</button>
+                    <button type="submit" class="button btn-default">SUBMIT</button>
 
                 </form>
             {{else}}
