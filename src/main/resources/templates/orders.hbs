@@ -1,0 +1,20 @@
+{{#partial "content"}}
+    <div style="color:purple; font-family:Serif; text-align:center">
+        <h1> List of Orders</h1>
+    </div>
+    {{#if orders}}
+        {{#each orders }}
+            <div class="card hero-card" style="margin: 20px; background-color:#eee; text-align:center; padding-top:10px; padding-bottom:10px;">
+                <a href="/customers/{{customerId}}/products/{{productId}}/orders/{{id}}">
+                    <div class="card-body">
+                        <p style="font-family:san Serif; font-size:18px; text-align:center">Id:{{id}}{{customerId}}{{productId}} {{customerName}}-{{productName}}</p>
+                    </div>
+                </a>
+            </div>
+        {{/each}}
+    {{else}}
+        <p>No orders yet!</p>
+    {{/if}}
+{{/partial}}
+
+{{> layout.hbs}}
