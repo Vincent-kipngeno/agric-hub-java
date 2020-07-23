@@ -4,6 +4,10 @@
 ## Description
 This App was created to fill in the gap of retailers by connecting farmers products to customers.
 
+## Screenshot
+
+
+
 ## Built With
 1. Java & Gradle
 2. Spark
