@@ -6,7 +6,7 @@ This App was created to fill in the gap of retailers by connecting farmers produ
 
 ## Screenshot
 
-
+![](proj.png)
 
 ## Built With
 1. Java & Gradle
