@@ -1,115 +1,240 @@
-{{#block "header"}}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>AGRI-HUB</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <link
-                href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-                rel="stylesheet"
-                integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-                crossorigin="anonymous"
-        />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/app.css"/>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{#block "title"}}Blog{{/block}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="app.css"/>
+</head>
+<style>
+    html, body{
+        overflow-x: hidden;
+    }
+    .intro-2 {
+        background: url("https://mdbootstrap.com/img/Photos/Others/img (51).jpg") rgba(0, 0, 0, 0.5) no-repeat center center;
+        background-size: cover;
+        text-align: center;
+        color: white;
+        background-blend-mode: multiply;
+    }
+    .hero-card:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     }
+    a:hover {
+        text-decoration: none;
+    }
+    .view {
+        margin-top: 50px;
+        padding-top: 20px;
+    }
+    .navbar {
+        z-index: 1;
+    }
+    .view {
+        height: 40vh;
+    }
+    div.polaroid {
+        margin-bottom: 20px;
+        maximum-width: 100%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
 
-    </head>
-    <body>
+    div.container {
+        padding: 10px;
+    }
+    .card-footer{
+        background-color: black;
+        padding-bottom: 20%;
+    }
+</style>
+<body>
+<header>
+    <nav class="navbar navbar-fixed-top navbar-dark" style="background-color:black;" >
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div  class="navbar-header">
+                <button  type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span style = "float: right" class = "btn btn-default" style = "color: white" >Toggle</span>
+                </button>
+                <a style = "color: white" class="navbar-brand" href="/"><strong>AGRI-HUB</strong></a>
+            </div>
 
-    <header>
-        <nav class="navbar navbar-fixed-top navbar-dark" style="background-color:black;" >
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div  class="navbar-header">
-                    <button  type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span style = "float: right" class = "btn btn-default" style = "color: white" >Toggle</span>
-                    </button>
-                    <a style = "color: white" class="navbar-brand" href="/"><strong>AGRI-HUB</strong></a>
-                </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Farmers Menu <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {{#if farmers}}
+                                {{#each farmers}}
+                                    <li><a style="color: orange;" href="/farmers/{{id}}">{{name}}</a></li>
+                                {{/each}}
+                                <li><a style="color: orange;" href="/farmers/new">Add Farmer</a></li>
+                            {{else}}
+                                <li><a style="color: orange;" href="/farmers/new">Add Farmer</a></li>
+                            {{/if}}
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Supply Menu<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a style="color: orange;" href="/supplies">View supplies</a></li>
+                            <li><a style="color: orange;" href="/supplies/new">Make a Supply</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products Menu <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {{#if products}}
+                                {{#each products}}
+                                    <li><a style="color: orange;" href="/products/{{id}}">{{name}}</a></li>
+                                {{/each}}
+                                <li><a style="color: orange;" href="/products/new">Add product</a></li>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Farmers Menu <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                {{#if farmers}}
-                                    {{#each farmers}}
-                                        <li><a style="color: orange;" href="/farmers/{{id}}">{{name}}</a></li>
-                                    {{/each}}
-                                    <li><a style="color: orange;" href="/farmers/new">Add Farmer</a></li>
+                            {{else}}
+                                <li><a style="color: orange;" href="/products/new">Add product</a></li>
+                            {{/if}}
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Order Menu<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a style="color: orange;" href="/orders">View orders</a></li>
+                            <li><a style="color: orange;" href="/orders/new">Place an order</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Customers Menu <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {{#if customers}}
+                                {{#each customer}}
+                                    <li><a style="color: orange;" href="/customers/{{id}}">{{name}}</a></li>
+                                {{/each}}
+                                <li><a style="color: orange;" href="/customers/new">Add a customer</a></li>
 
-                                {{else}}
-                                    <li><a style="color: orange;" href="/farmers/new">Add Farmer</a></li>
-                                {{/if}}
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Supply Menu<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a style="color: orange;" href="/supplies">View supplies</a></li>
-                                <li><a style="color: orange;" href="/supplies/new">Make a Supply</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products Menu <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                {{#if products}}
-                                    {{#each products}}
-                                        <li><a style="color: orange;" href="/products/{{id}}">{{name}}</a></li>
-                                    {{/each}}
-                                    <li><a style="color: orange;" href="/products/new">Add product</a></li>
-
-                                {{else}}
-                                    <li><a style="color: orange;" href="/products/new">Add product</a></li>
-                                {{/if}}
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Order Menu<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a style="color: orange;" href="/orders">View orders</a></li>
-                                <li><a style="color: orange;" href="/orders/new">Place an order</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a style = "color: white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Customers Menu <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                {{#if customers}}
-                                    {{#each customer}}
-                                        <li><a style="color: orange;" href="/customers/{{id}}">{{name}}</a></li>
-                                    {{/each}}
-                                    <li><a style="color: orange;" href="/customers/new">Add a customer</a></li>
-
-                                {{else}}
-                                    <li><a style="color: orange;" href="/customers/new">Add a customer</a></li>
-                                {{/if}}
-                            </ul>
-                        </li>
-                    </ul>
+                            {{else}}
+                                <li><a style="color: orange;" href="/customers/new">Add a customer</a></li>
+                            {{/if}}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="view intro-2">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-strong flex-center">
+                <div class="container">
+                    <div class="white-text text-center wow fadeInUp">
+                        <h2>Welcome to my Hero Squad App.</h2>
+                        <h3>All squads have a predefined limit of 10 heroes!!</h3>
+                        <br>
+                        <p>Add your hero and hero squad to the list. You can also look around to explore existing heroes and squads.</p>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <!--begin main template-->
+    <div class="row ">
+        <div class="col-md-2"></div>
+        <div class = "col-md-8">
+            {{#block "content"}}
+            {{/block}}
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+<!--end main template-->
+<footer class="footer">
     <div class="container">
-
-        {{#block "content"}}
-        {{/block}}
+        <hr>
+        <div  class="row text-muted">
+            <div class="col-md-12" style="text-align: center">
+                <a class="btn btn-lg btn-primary" href="/squads/delete">Delete All Squads & Heroes</a>
+                <a class="btn btn-lg btn-primary" href="/heroes/delete">Delete All Heroes</a>
+            </div>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-3">
+                    <div class="polaroid">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/img%20(55).jpg" alt="Norway" style="width:100%">
+                        <div class="container">
+                            <p>Hardanger, Norway</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="polaroid">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/img%20(43).jpg" alt="Norway" style="width:100%">
+                        <div class="container">
+                            <p>Hardanger, Norway</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="polaroid">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/img%20(46).jpg" alt="Norway" style="width:100%">
+                        <div class="container">
+                            <p>Hardanger, Norway</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="polaroid">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/img%20(45).jpg" alt="Norway" style="width:100%">
+                        <div class="container">
+                            <p>Hardanger, Norway</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <br>
-    <br>
-    <footer class="footer">
+    <div class="card card-footer">
+        <section class="container contact-section">
+            <h1 style="color: orange; font-family:serif;">Connect with on socials</h1>
+            <div class="row" style="color: white;">
+                <div class="col-md-3 col-lg-3 col-sm-3">
 
+                </div>
+                <div class=" col-md-6 col-lg-6 col-sm-6 ">
+                    <div class="col-md-3 col-lg-3 col-sm-3">
+                        <i class="fa fa-twitter"></i>
+                        Twitter
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-sm-3">
+                        <i class="fa fa-facebook"></i>
+                        Facebook
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-sm-3">
+                        <i class="fa fa-instagram"></i>
+                        Instagram
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-sm-3">
+                        <i class="fa fa-medium"></i>
+                        Medium
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-3">
 
-
-    </footer>
+                </div>
+            </div>
+        </section>
     </div>
-    </body>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    </html>
-{{/block}}
+</footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</html>
