@@ -1,38 +1,40 @@
 {{#partial "content"}}
-    {{#if editCustomer}}
-        <h1>EDIT HERE</h1>
-        <form class="formstyle" action="/customers/{{editCustomer.id}}" method="post">
-            <div class="form-group">
-                <label for="name">EDIT NAME</label>
-                <input id="name" placeholder="Edit customer name here....." name="name" class="form-control" type="text" value="{{editCustomer.name}}">
-            </div>
-            <div class="form-group">
-                <label for="location">EDIT LOCATION</label>
-                <input id="location" placeholder="Edit customer location here....." name="location" class="form-control" type="text" value="{{editCustomer.location}}">
-            </div>
-            <div class="form-group">
-                <label for="email">EDIT EMAIL</label>
-                <input id="email" placeholder="Edit customer email here....." name="email" class="form-control" type="email" value="{{editCustomer.email}}">
-            </div>
-            <button type="submit" class="button btn-default">EDIT</button>
-        </form>
-    {{else}}
-        <h1>ENTER CUSTOMER CREDENTIALS HERE:</h1>
-        <form class="form" action="/customers" method="post">
-            <div class="form-group">
-                <label for="name">ENTER NAME</label>
-                <input id="name" placeholder="Enter customer name here....." name="name" class="form-control" type="text" value="">
-            </div>
-            <div class="form-group">
-                <label for="location">ENTER LOCATION</label>
-                <input id="location" placeholder="Enter  customer location here....." name="location" class="form-control" type="text" value="">
-            </div>
-            <div class="form-group">
-                <label for="email">ENTER EMAIL</label>
-                <input id="email" placeholder="Enter customer email here....." name="email" class="form-control" type="email" value="">
-            </div>
-            <button type="submit" class="button btn-warning">SUBMIT</button>
-        </form>
-    {{/if}}
+    <div class="r-supplyform " class="r-formContainer">
+        {{#if editCustomer}}
+            <h1>EDIT HERE</h1>
+            <form class="formstyle" action="/customers/{{editCustomer.id}}" method="post">
+                <div class="form-group">
+                    <label for="name">EDIT NAME</label>
+                    <input id="name" placeholder="Edit customer name here....." name="name" class="form-control" type="text" value="{{editCustomer.name}}">
+                </div>
+                <div class="form-group">
+                    <label for="location">EDIT LOCATION</label>
+                    <input id="location" placeholder="Edit customer location here....." name="location" class="form-control" type="text" value="{{editCustomer.location}}">
+                </div>
+                <div class="form-group">
+                    <label for="email">EDIT EMAIL</label>
+                    <input id="email" placeholder="Edit customer email here....." name="email" class="form-control" type="email" value="{{editCustomer.email}}">
+                </div>
+                <button type="submit" class="button btn-primary">EDIT</button>
+            </form>
+        {{else}}
+            <h1>ENTER CUSTOMER CREDENTIALS HERE:</h1>
+            <form class="form" action="/customers" method="post">
+                <div class="form-group">
+                    <label for="name">ENTER NAME</label>
+                    <input id="name" placeholder="Enter customer name here....." name="name" class="form-control" type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="location">ENTER LOCATION</label>
+                    <input id="location" placeholder="Enter  customer location here....." name="location" class="form-control" type="text" value="">
+                </div>
+                <div class="form-group">
+                    <label for="email">ENTER EMAIL</label>
+                    <input id="email" placeholder="Enter customer email here....." name="email" class="form-control" type="email" value="">
+                </div>
+                <button type="submit" class="button btn-primary">SUBMIT</button>
+            </form>
+        {{/if}}
+    </div>
     {{/partial}}
 {{> layout.hbs}}
