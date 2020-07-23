@@ -9,5 +9,13 @@
             <p>Total Cost: KSHs {{supply.totalPrice}}</p>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class = "col-md-12">
+                <a class="btn btn-warning" href="/supplies/{{id}}/edit">Edit</a>
+                <a class="btn btn-warning" href="/farmers/{{supply.farmerId}}/products/{{supply.productId}}/supplies/{{id}}/delete">DELETE</a>
+            </div>
+        </div>
+    </div>
 {{/partial}}
 {{> layout.hbs}}
