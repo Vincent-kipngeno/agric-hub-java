@@ -5,32 +5,26 @@
                 <p> NAME OF CUSTOMER:{{ customer.name }}</p>
                 <p> LOCATION: {{customer.location}}</p>
                 <p> EMAIL: {{customer.email}}</p>
-                <tr>
-                    <td>ORDERS MADE:</td>
-                </tr>
-                <tr>
-                    <td> Customer </td>
-                    <td> Product </td>
-                    <td> Quantity </td>
-                </tr>
-                {{#each orders}}
+                <table>
+                    <caption>ORDERS MADE:</caption>
                     <tr>
-                        <td>
-                            {{customerName}}
-                        </td>
-                        <td>
-                            {{productName}}
-                        </td>
-                        <td>
-                            {{quantity}}
-                        </td>
+                        <th> Customer </th>
+                        <th> Product </th>
+                        <th> Quantity </th>
                     </tr>
-                {{/each}}
+                    {{#each orders}}
+                        <tr>
+                            <td>{{customerName}}</td>
+                            <td>{{productName}}</td>
+                            <td>{{quantity}}</td>
+                        </tr>
+                    {{/each}}
+                </table>
                 <div class="row">
                     <div class="col-md-12">
                         <div class = "col-md-12">
-                            <a class="btn btn-warning" href="/customers/{{id}}/edit">EDIT</a>
-                            <a class="btn btn-warning" href="/customers/{{id}}/delete">DELETE</a>
+                            <a class="btn btn-warning" href="/customers/{{customer.id}}/edit">EDIT</a>
+                            <a class="btn btn-warning" href="/customers/{{customer.id}}/delete">DELETE</a>
                         </div>
                     </div>
                 </div>

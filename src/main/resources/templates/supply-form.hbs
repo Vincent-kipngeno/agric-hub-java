@@ -2,10 +2,10 @@
     <div class="r-supplyform " class="r-formContainer">
     {{#if editSupply}}
         <h1>EDIT HERE</h1>
-        <form action="/supplies/:id" method="post">
+        <form action="/supplies/{{editSupply.id}}" method="post">
             <div class="form-group">
                 <label for="farmers">Edit farmer</label>
-                <select id="farmers" name="farmers">
+                <select id="farmers" name="farmers" class="form-control">
                     {{#each farmers}}
                         <option value ="{{id}}">{{name}}</option>
                     {{/each}}
@@ -13,8 +13,8 @@
             </div>
             <div class="form-group">
                 <label for="product"> Change product from farmer</label>
-                <select id="product" name="product">
-                    {{#each product}}
+                <select id="product" name="product" class="form-control">
+                    {{#each products}}
                         <option value ="{{id}}">{{name}}</option>
                     {{/each}}
                 </select>
@@ -28,17 +28,17 @@
                 <input type="number" id="price" class="form-control" value="{{editSupply.price}}" placeholder="Edit price">
             </div>
             <h2>Don't see the right product or farmer? <a class="btn btn-success" href="/products/new">Add product.</a><a class="btn btn-success" href="/farmer/new">Add Farmer.</a></h2>
-            <button type="submit" class="button btn-default">EDIT</button>
+            <button type="submit" class="btn btn-success">EDIT</button>
         </form>
     {{else}}
         {{#if farmers}}
             {{#if products}}
-                <form action="/supplies">
+                <form action="/supplies" method="post" class="form">
                     <h1>Fill in the supply form</h1>
 
                     <div class="form-group">
                         <label for="farmers">Select farmer</label>
-                        <select id="farmers" name="farmers">
+                        <select id="farmers" name="farmers" class="form-control">
                             {{#each farmers}}
                                 <option value ="{{id}}">{{name}}</option>
                             {{/each}}
@@ -46,23 +46,23 @@
                     </div>
                     <div class="form-group">
                         <label for="product">Select product from farmer</label>
-                        <select id="product" name="product">
-                            {{#each product}}
+                        <select id="product" name="product" class="form-control">
+                            {{#each products}}
                                 <option value ="{{id}}">{{name}}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="quantity">Enter quantity of product</label>
-                        <input type="text" id="quantity" class="quantity form-control" placeholder="Quantity">
+                        <input type="number" id="quantity" name="quantity" class="quantity form-control" placeholder="Quantity">
                     </div>
                     <div class="form-group">
                         <label for="price">Enter price of product</label>
-                        <input type="text" id="price" class="quantity form-control" placeholder="Price">
+                        <input type="text" id="price" name="price" class="quantity form-control" placeholder="Price">
                     </div>
                     <h2>Don't see the right product or farmer? <a class="btn btn-success" href="/products/new">Add product.</a><a class="btn btn-success" href="/farmer/new">Add Farmer.</a></h2>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-outline-success">Submit</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
                     </div>
                 </form>
             {{else}}
@@ -74,3 +74,4 @@
     {{/if}}
     </div>
 {{/partial}}
+{{> layout.hbs}}
