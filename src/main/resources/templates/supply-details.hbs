@@ -1,7 +1,8 @@
 {{#partial "content"}}
     <div class="row">
         <div class="col-md-6">
-            <h3>Order: {{supply.farmerName}} - {{supply.productName}}</h3>
+            <h3>Supply: {{supply.farmerName}} - {{supply.productName}}</h3>
+            <p>Farmer: <a href="/farmers/{{supply.farmerId}}">{{supply.farmerName}}</a></p>
         </div>
     </div>
 {{/partial}}
