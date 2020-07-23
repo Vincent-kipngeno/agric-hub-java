@@ -23,3 +23,8 @@ This App was created to fill in the gap of retailers by connecting farmers produ
 For any questions concerning the app contact our SCRUM master through the email vincentkipngeno@gmail.com. 
 Feel free to give your feedback too.
 
+### License
+
+
+Copyright (c) 2020 **Vincent Kipngeno**,
+**Abubakar Ramadhan**, **Maureen Chepkirui**, **Brian Muthaka**
