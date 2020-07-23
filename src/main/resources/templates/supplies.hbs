@@ -1,0 +1,19 @@
+{{#partial "content"}}
+    <div style="color:purple; font-family:Serif; text-align:center">
+        <h1> List of Supplies</h1>
+    </div>
+    {{#if supplies}}
+        {{#each supplies}}
+            <div class="card hero-card" style="margin: 20px; background-color:#eee; text-align:center; padding-top:10px; padding-bottom:10px;">
+                <a href="/farmers/{{farmerId}}/products/{{productId}}/supplies/{{id}}">
+                    <div class="card-body">
+                        <p style="font-family:san Serif; font-size:18px; text-align:center">Id:{{id}}{{farmerId}}{{productId}} {{farmerName}}-{{productName}}</p>
+                    </div>
+                </a>
+            </div>
+        {{/each}}
+    {{else}}
+        <p>No supplies yet</p>
+    {{/if}}
+{{/partial}}
+{{> layout.hbs}}

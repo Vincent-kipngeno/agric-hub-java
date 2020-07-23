@@ -20,6 +20,7 @@
                 <label for="quantity">Enter quantity:</label>
                 <input class="form-control" type="number" name="quantity" value="{{editOrder.quantity}}" id="quantity">
             </div>
+            <p>Don't see the right customer or product ? <a class="btn btn-success" href="/customers/new">Add Customer</a><a class="btn btn-success" href="/products/new">Add product</a></p>
             <button type="submit" class="button btn-default">EDIT</button>
         </form>
     {{else}}
@@ -47,7 +48,9 @@
                         <label for="quantity">Enter quantity:</label>
                         <input class="form-control" type="number" name="quantity" id="quantity">
                     </div>
-                    <button type="submit" class="button btn-default">SUBMIT</button>
+                    <p>Don't see the right customer or product ? <a class="btn btn-success" href="/customers/new">Add Customer</a><a class="btn btn-success" href="/products/new">Add product</a></p>
+                    <button type="submit" class="button btn-default">EDIT</button>
+
                 </form>
             {{else}}
                 <p>Sorry there are no products yet. Apologies for the inconveniences caused, we will reach out to you once they are supplied.</p>
