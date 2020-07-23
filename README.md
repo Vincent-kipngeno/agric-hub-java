@@ -8,6 +8,12 @@ This App was created to fill in the gap of retailers by connecting farmers produ
 
 ![](proj.png)
 
+## Technologies
+
+![](https://forthebadge.com/images/badges/powered-by-electricity.svg) ![](https://forthebadge.com/images/badges/uses-html.svg)![](https://forthebadge.com/images/badges/made-with-java.svg) ![](https://forthebadge.com/images/badges/uses-css.svg) ![](https://forthebadge.com/images/badges/uses-git.svg)
+
+## GETTING STARTED
+
 ## Built With
 1. Java & Gradle
 2. Spark
