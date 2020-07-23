@@ -56,7 +56,7 @@ a:hover {
     /* background: #333; */
     padding: 30px;
   }
-
+.Prod{
     background-image: url(images/produce1.jpeg);
     background-repeat: no-repeat;
     height:100%;
@@ -69,6 +69,6 @@ a:hover {
     height:100%;
     animation: 1s ease-out 0s 1 slideInFromLeft;
     }
-  }
+ }
   }
 
