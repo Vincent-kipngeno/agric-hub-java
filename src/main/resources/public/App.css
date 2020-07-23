@@ -54,10 +54,18 @@ html, body{
         padding-bottom: 20%;
     }
 
+    .btn, .button {
+        margin: 8px;
+    }
+
+
+
 .r-index{
-    background: url('/images/index.jpg');
+    background: url('/images/index.jpg') rgba(0, 0, 0, 0.5) no-repeat center center;
     background-size: cover;
     background-repeat: no-repeat;
+    color: white;
+    background-blend-mode: multiply;
 }
 
 .jumbotron {
@@ -72,11 +80,12 @@ a:hover {
 }
 
 .r-supplyform{
-    background: url('/images/supply.jpg');
+    background: url('/images/supply.jpg') rgba(0, 0, 0, 0.5) no-repeat center center;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-
+    color: white;
+    background-blend-mode: multiply;
 }
 
 .r-formContainer{
