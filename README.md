@@ -10,7 +10,16 @@ This App was created to fill in the gap of retailers by connecting farmers produ
 3. Junit for testing
 4. PostgreSQL database
 
-## Setup Guide
-+ Run `sudo apt-get install postgresql postgresql-contrib libpq-dev` in the terminal to install PostgreSQL in your device.
-+ Run `psql < create.sql` on files root folder to create database.
- 
+## Setup/Installation Requirements
+* To use this project, clone it.
+* Make sure java, gradle, heroku,postman extension and postgresql is installed
+* Navigate to src/main/java/resources/db and run in terminal psql < create.sql(creates required database with required tables)
+* Test links in App in postman.
+* Clone Github link https://github.com/Vincent-kipngeno/agric-hub-java
+
+## Live Site
+
+## Support and contact details
+For any questions concerning the app contact our SCRUM master through the email vincentkipngeno@gmail.com. 
+Feel free to give your feedback too.
+
