@@ -2,19 +2,9 @@
     <div class="row">
         <div class="col-md-6">
             <div class="Details">
-                <tr>
-                    <td>PRODUCTS AVAILABLE:</td>
-                </tr>
-                <tr>
-                    <td> Product </td>
-
-                </tr>
-                {{#each supplies}}
-                    <tr>
-                        <td>
-                            {{productName}}
-                        </td>
-                    </tr>
+                <p>PRODUCTS AVAILABLE:</p>
+                {{#each products}}
+                    <option value="{{id}}">{{name}} </option>
                 {{/each}}
                 <div class="row">
                     <div class="col-md-12">
