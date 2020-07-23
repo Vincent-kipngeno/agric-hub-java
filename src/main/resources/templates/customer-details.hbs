@@ -5,27 +5,23 @@
                 <p> NAME OF CUSTOMER:{{ customer.name }}</p>
                 <p> LOCATION: {{customer.location}}</p>
                 <p> EMAIL: {{customer.email}}</p>
-                <tr>
-                    <td>ORDERS MADE:</td>
-                </tr>
-                <tr>
-                    <td> Customer </td>
-                    <td> Product </td>
-                    <td> Quantity </td>
-                </tr>
-                {{#each orders}}
+                <table>
                     <tr>
-                        <td>
-                            {{customerName}}
-                        </td>
-                        <td>
-                            {{productName}}
-                        </td>
-                        <td>
-                            {{quantity}}
-                        </td>
+                        <th>ORDERS MADE:</th>
                     </tr>
-                {{/each}}
+                    <tr>
+                        <th> Customer </th>
+                        <th> Product </th>
+                        <th> Quantity </th>
+                    </tr>
+                    {{#each orders}}
+                        <tr>
+                            <td>{{customerName}}</td>
+                            <td>{{productName}}</td>
+                            <td>{{quantity}}</td>
+                        </tr>
+                    {{/each}}
+                </table>
                 <div class="row">
                     <div class="col-md-12">
                         <div class = "col-md-12">

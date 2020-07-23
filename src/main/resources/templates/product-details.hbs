@@ -5,38 +5,42 @@
                 <h1>{{product.name}}</h1>
                 <div class="row">
                    <div class="col-md-6">
-                       <tr>
-                           <td><h2 style="text-align:center;">Supplies Made </h2></td>
-                       </tr>
-                       <tr>
-                           <td> Farmer </td>
-                           <td> Product </td>
-                           <td> Quantity </td>
-                       </tr>
-                       {{#each supplies}}
+                       <table>
                            <tr>
-                               <td>{{farmerName}}</td>
-                               <td>{{productName}}</td>
-                               <td>{{quantity}}</td>
+                               <th><h2 style="text-align:center;">Supplies Made </h2></th>
                            </tr>
-                       {{/each}}
+                           <tr>
+                               <th> Farmer </th>
+                               <th> Product </th>
+                               <th> Quantity </th>
+                           </tr>
+                           {{#each supplies}}
+                               <tr>
+                                   <td>{{farmerName}}</td>
+                                   <td>{{productName}}</td>
+                                   <td>{{quantity}}</td>
+                               </tr>
+                           {{/each}}
+                       </table>
                    </div>
                     <div class="col-md-6">
-                        <tr>
-                            <td><h2 style="text-align:center;">Orders Made </h2></td>
-                        </tr>
-                        <tr>
-                            <td> Customer </td>
-                            <td> Product </td>
-                            <td> Quantity </td>
-                        </tr>
-                        {{#each orders}}
+                        <table>
                             <tr>
-                                <td>{{customerName}}</td>
-                                <td>{{productName}}</td>
-                                <td>{{quantity}}</td>
+                                <th><h2 style="text-align:center;">Orders Made </h2></th>
                             </tr>
-                        {{/each}}
+                            <tr>
+                                <th> Customer </th>
+                                <th> Product </th>
+                                <th> Quantity </th>
+                            </tr>
+                            {{#each orders}}
+                                <tr>
+                                    <td>{{customerName}}</td>
+                                    <td>{{productName}}</td>
+                                    <td>{{quantity}}</td>
+                                </tr>
+                            {{/each}}
+                        </table>
                     </div>
                 </div>
                 <div class="row">
