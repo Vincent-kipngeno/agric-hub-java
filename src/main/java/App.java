@@ -63,6 +63,17 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        //get: delete all entries
+        get("/all/delete", (req, res) -> {
+            Map<String, Object> models = new HashMap<>();
+            farmerDao.clearAll();
+            supplyDao.clearAll();
+            productDao.clearAll();
+            customerDao.clearAll();
+            orderDao.clearAll();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
         //get: delete all farmers
         get("/farmers/delete", (req, res) -> {
