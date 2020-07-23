@@ -102,7 +102,7 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //get: get form to update a farmer
-        get("/farmers/:id/edit", (req, resp) -> {
+        get("/farmers/:id/edit", (req, res) -> {
            Map<String, Object> models = new HashMap<>();
            int farmerId = Integer.parseInt(req.params("id"));
            models.put("editFarmer", farmerDao.findById(farmerId));
@@ -112,6 +112,7 @@ public class App {
            models.put("products", productDao.getAll());
            return new ModelAndView(models, "farmer-form.hbs");
         }, new HandlebarsTemplateEngine());
+
         //post: update a farmer's details
         post("/farmers/:id", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
@@ -356,7 +357,7 @@ public class App {
 
 
         //get: get form to update a customer
-        get("/customers/:id/edit", (req, resp) -> {
+        get("/customers/:id/edit", (req, res) -> {
             Map<String, Object> models = new HashMap<>();
             int customerId = Integer.parseInt(req.params("id"));
             models.put("editCustomer", customerDao.findById(customerId));

@@ -1,7 +1,7 @@
 {{#partial "content"}}
     {{#if editCustomer}}
         <h1>EDIT HERE</h1>
-        <form class="formstyle" action="/customers/:id" method="post">
+        <form class="formstyle" action="/customers/{{editCustomer.id}}" method="post">
             <div class="form-group">
                 <label for="name">EDIT NAME</label>
                 <input id="name" placeholder="Edit customer name here....." name="name" class="form-control" type="text" value="{{editCustomer.name}}">
@@ -18,7 +18,7 @@
         </form>
     {{else}}
         <h1>ENTER CUSTOMER CREDENTIALS HERE:</h1>
-        <form class="formstyle" action="/customers" method="post">
+        <form class="form" action="/customers" method="post">
             <div class="form-group">
                 <label for="name">ENTER NAME</label>
                 <input id="name" placeholder="Enter customer name here....." name="name" class="form-control" type="text" value="">

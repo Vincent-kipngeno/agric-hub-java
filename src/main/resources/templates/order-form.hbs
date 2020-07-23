@@ -1,7 +1,7 @@
 {{#partial "content"}}
     {{#if editOrder}}
         <h1>EDIT HERE</h1>
-        <form class="form" action="/orders/:id" method="post">
+        <form class="form" action="/orders/{{editOrder.id}}" method="post">
             <div class="form-group">
                 <label for="customerId">Select customer:</label>
                 <select name="customerId" class="form-control" id="customerId"></select>

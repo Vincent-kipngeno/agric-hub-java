@@ -2,7 +2,7 @@
     <div class="r-supplyform " class="r-formContainer">
     {{#if editSupply}}
         <h1>EDIT HERE</h1>
-        <form action="/supplies/:id" method="post">
+        <form action="/supplies/{{editSupply.id}}" method="post">
             <div class="form-group">
                 <label for="farmers">Edit farmer</label>
                 <select id="farmers" name="farmers">
@@ -74,3 +74,4 @@
     {{/if}}
     </div>
 {{/partial}}
+{{> layout.hbs}}
