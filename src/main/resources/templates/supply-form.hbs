@@ -1,5 +1,5 @@
 {{#partial "content"}}
-    <div class="r-supplyform" class="r-formContainer">
+    <div class="r-supplyform " class="r-formContainer">
     {{#if editSupply}}
         <h1>EDIT HERE</h1>
         <form action="/supplies/:id" method="post">
@@ -7,7 +7,7 @@
                 <label for="farmers">Edit farmer</label>
                 <select id="farmers" name="farmers">
                     {{#each farmers}}
-                        <option value = {{id}}>{{name}}</option>
+                        <option value ="{{id}}">{{name}}</option>
                     {{/each}}
                 </select>
             </div>
@@ -15,26 +15,30 @@
                 <label for="product"> Change product from farmer</label>
                 <select id="product" name="product">
                     {{#each product}}
-                        <option value = {{id}}>{{name}}</option>
+                        <option value ="{{id}}">{{name}}</option>
                     {{/each}}
                 </select>
             </div>
             <div class="form-group">
                 <label for="quantity">Enter quantity of product</label>
-                <input type="text" id="quantity" class="quantity" placeholder="Edit Quantity">
+                <input type="number" id="quantity" class="form-control" value="{{editSupply.quantity}}" placeholder="Edit price">
+            </div>
+            <div class="form-group">
+                <label for="price">Enter price of product</label>
+                <input type="number" id="price" class="form-control" value="{{editSupply.price}}" placeholder="Edit price">
             </div>
             <button type="submit" class="button btn-default">EDIT</button>
         </form>
     {{else}}
 
-        <form action="/supplies/new">
+        <form action="/supplies">
             <h1>Fill in the supply form</h1>
 
             <div class="form-group">
                 <label for="farmers">Select farmer</label>
                 <select id="farmers" name="farmers">
                     {{#each farmers}}
-                        <option value = {{id}}>{{name}}</option>
+                        <option value ="{{id}}">{{name}}</option>
                     {{/each}}
                 </select>
             </div>
@@ -42,13 +46,17 @@
                 <label for="product">Select product from farmer</label>
                 <select id="product" name="product">
                     {{#each product}}
-                        <option value = {{id}}>{{name}}</option>
+                        <option value ="{{id}}">{{name}}</option>
                     {{/each}}
                 </select>
             </div>
             <div class="form-group">
                 <label for="quantity">Enter quantity of product</label>
-                <input type="text" id="quantity" class="quantity" placeholder="Quantity">
+                <input type="text" id="quantity" class="quantity form-control" placeholder="Quantity">
+            </div>
+            <div class="form-group">
+                <label for="price">Enter price of product</label>
+                <input type="text" id="price" class="quantity form-control" placeholder="Price">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-outline-success">Submit</button>
