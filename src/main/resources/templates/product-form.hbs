@@ -1,3 +1,10 @@
 {{#partial "content"}}
-
+    <h1>ENTER YOUR PRODUCT HERE:</h1>
+    <form class="formstyle" action="/products" method="post">
+        <div class="form-group">
+            <label for="name">PRODUCT NAME:</label>
+            <input id="name" placeholder="Enter product name here....." name="name" class="form-control" type="text" value="">
+        </div>
+        <button type="submit" class="button btn-default">SUBMIT</button>
+    </form>
     {{/partial}}
