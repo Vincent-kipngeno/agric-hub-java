@@ -18,6 +18,9 @@ public class Sql2oProductDao implements ProductDao {
 
     @Override
     public void add(Product product) {
+        if( product.getName() == null || product.getName().trim().isEmpty() ){
+            throw new NullPointerException("name cannot be null or empty");
+        }
         String sql = "INSERT INTO products (name) VALUES (:name);";
         try (Connection conn = sql2o.open()) {
             int id = (int) conn.createQuery(sql, true)
