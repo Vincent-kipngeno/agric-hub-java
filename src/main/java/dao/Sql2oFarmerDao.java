@@ -17,6 +17,9 @@ public class Sql2oFarmerDao implements FarmerDao {
 
     @Override
     public void add(Farmer farmer) {
+        if( farmer.getName() == null || farmer.getName().trim().isEmpty() || farmer.getLocation() == null || farmer.getLocation().trim().isEmpty() || farmer.getEmail() == null || farmer.getEmail().trim().isEmpty()){
+            throw new NullPointerException("name cannot be null or empty");
+        }
         String sql = "INSERT INTO farmers (name, location, email) VALUES (:name, :location, :email);";
         try (Connection conn = sql2o.open()) {
             int id = (int) conn.createQuery(sql, true)

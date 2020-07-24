@@ -12,6 +12,13 @@ import java.util.Map;
 import static spark.Spark.*;
 
 public class App {
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
     public static void main(String[] args) {
         staticFileLocation("/public");
 
@@ -22,8 +29,8 @@ public class App {
         Sql2oProductDao productDao;
         Connection conn;
 
-        String connectionString = "jdbc:postgresql://localhost:5432/agric_hub";
-        Sql2o sql2o = new Sql2o(connectionString, "maureenbett", "kenyan082bett");
+        String connectionString = "jdbc:postgresql://ec2-23-20-168-40.compute-1.amazonaws.com:5432/db7a04u1tg0358?sslmode=require";
+        Sql2o sql2o = new Sql2o(connectionString, "piqnbttlhvpzbp", "41969debc7725fabd8df77f31d8807bd67031f72c9c19f4d503d220d57d076c4");
         orderDao = new Sql2oOrderDao(sql2o);
         supplyDao = new Sql2oSupplyDao(sql2o);
         farmerDao = new Sql2oFarmerDao(sql2o);
@@ -58,9 +65,13 @@ public class App {
             String location = req.queryParams("location");
             String email = req.queryParams("email");
             Farmer farmer = new Farmer(name, location, email);
-            farmerDao.add(farmer);
-            res.redirect("/");
-            return null;
+            try{
+                farmerDao.add(farmer);
+                res.redirect("/");
+                return null;
+            } catch (NullPointerException ex) {
+                return  new ModelAndView(models, "exceptions.hbs");
+            }
         }, new HandlebarsTemplateEngine());
 
         //get: delete all entries
@@ -242,9 +253,13 @@ public class App {
             Map<String, Object> models = new HashMap<>();
             String name = req.queryParams("name");
             Product product = new Product(name);
-            productDao.add(product);
-            res.redirect("/");
-            return null;
+            try{
+                productDao.add(product);
+                res.redirect("/");
+                return null;
+            }catch (NullPointerException ex) {
+                return new ModelAndView(models, "exceptions.hbs");
+            }
         }, new HandlebarsTemplateEngine());
 
         //get: delete all products
@@ -322,9 +337,13 @@ public class App {
             String location = req.queryParams("location");
             String email = req.queryParams("email");
             Customer customer = new Customer(name, location, email);
-            customerDao.add(customer);
-            res.redirect("/");
-            return null;
+            try{
+                customerDao.add(customer);
+                res.redirect("/");
+                return null;
+            }catch (NullPointerException ex){
+                return  new ModelAndView(models, "exceptions.hbs");
+            }
         }, new HandlebarsTemplateEngine());
 
 
