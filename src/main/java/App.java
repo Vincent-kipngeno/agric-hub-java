@@ -23,7 +23,7 @@ public class App {
         Connection conn;
 
         String connectionString = "jdbc:postgresql://localhost:5432/agric_hub";
-        Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
+        Sql2o sql2o = new Sql2o(connectionString, "maureenbett", "kenyan082bett");
         orderDao = new Sql2oOrderDao(sql2o);
         supplyDao = new Sql2oSupplyDao(sql2o);
         farmerDao = new Sql2oFarmerDao(sql2o);
