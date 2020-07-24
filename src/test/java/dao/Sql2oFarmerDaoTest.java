@@ -23,7 +23,7 @@ public class Sql2oFarmerDaoTest {
     @BeforeClass
     public static void setUp() throws Exception {
         String connectionString = "jdbc:postgresql://localhost:5432/agric_hub_test";
-        Sql2o sql2o = new Sql2o(connectionString, "maureenbett", "kenyan082bett");
+        Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
         farmerDao = new Sql2oFarmerDao(sql2o);
         productDao = new Sql2oProductDao(sql2o);
         supplyDao = new Sql2oSupplyDao(sql2o);
@@ -123,6 +123,21 @@ public class Sql2oFarmerDaoTest {
         assertTrue(supplies.contains(supply));
         assertTrue(supplies.contains(anotherSupply));
         assertEquals(2, supplies.size());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void save_throwsExceptionIfNameNull(){
+        Farmer farmer = new Farmer(null, null, null);
+        farmerDao.add(farmer);
+    }
+
+    @Test
+    public void save_nameCannotBeNull(){
+        Farmer farmer = new Farmer(null, null, null);
+        try {
+            farmerDao.add(farmer);
+            assertTrue(farmerDao.findById(farmer.getId()).equals(farmer));
+        } catch (NullPointerException exception){ System.out.println(exception);}
     }
 
     public Farmer setFarmer(){
