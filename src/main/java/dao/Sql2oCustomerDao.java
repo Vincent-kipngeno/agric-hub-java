@@ -17,6 +17,9 @@ public class Sql2oCustomerDao implements CustomerDao {
 
     @Override
     public void add(Customer customer) {
+        if( customer.getName() == null || customer.getName().trim().isEmpty() || customer.getLocation() == null || customer.getLocation().trim().isEmpty() || customer.getEmail() == null || customer.getEmail().trim().isEmpty()){
+            throw new NullPointerException("name cannot be null or empty");
+        }
         String sql = "INSERT INTO customers (name, location, email) VALUES (:name, :location, :email);";
         try (Connection conn = sql2o.open()) {
             int id = (int) conn.createQuery(sql, true)
