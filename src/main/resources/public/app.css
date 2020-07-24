@@ -3,9 +3,11 @@
 @import url('https://fonts.googleapis.com/css2?family=El+Messiri&display=swap');
 
 .r-index{
-    background: url('/images/index.jpg');
+    background: url('/images/index.jpg') rgba(0, 0, 0, 0.5) no-repeat center center;
     background-size: cover;
     background-repeat: no-repeat;
+    color: white;
+    background-blend-mode: multiply;
 }
 
 .jumbotron {
@@ -20,10 +22,12 @@ a:hover {
 }
 
 .r-supplyform{
-    background: url('/images/supply.jpg');
+    background: url('/images/supply.jpg') rgba(0, 0, 0, 0.5) no-repeat center center;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    color: white;
+    background-blend-mode: multiply;
 
 }
 

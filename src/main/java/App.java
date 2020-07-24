@@ -29,8 +29,10 @@ public class App {
         Sql2oProductDao productDao;
         Connection conn;
 
-        String connectionString = "jdbc:postgresql://ec2-23-20-168-40.compute-1.amazonaws.com:5432/db7a04u1tg0358?sslmode=require";
-        Sql2o sql2o = new Sql2o(connectionString, "piqnbttlhvpzbp", "41969debc7725fabd8df77f31d8807bd67031f72c9c19f4d503d220d57d076c4");
+        //String connectionString = "jdbc:postgresql://ec2-23-20-168-40.compute-1.amazonaws.com:5432/db7a04u1tg0358?sslmode=require";
+        //Sql2o sql2o = new Sql2o(connectionString, "piqnbttlhvpzbp", "41969debc7725fabd8df77f31d8807bd67031f72c9c19f4d503d220d57d076c4");
+        String connectionString = "jdbc:postgresql://localhost:5432/agric_hub";
+        Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
         orderDao = new Sql2oOrderDao(sql2o);
         supplyDao = new Sql2oSupplyDao(sql2o);
         farmerDao = new Sql2oFarmerDao(sql2o);
