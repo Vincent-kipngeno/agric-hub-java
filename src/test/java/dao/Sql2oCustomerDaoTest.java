@@ -26,7 +26,7 @@ public class Sql2oCustomerDaoTest {
         //String connectionString = "jdbc:postgresql://ec2-3-216-129-140.compute-1.amazonaws.com:5432/d3aikstsi226hh?sslmode=require";
         //Sql2o sql2o = new Sql2o(connectionString, "zviqvryakhhdzl", "e235861e9ef5fa2b1f594ede7634d3e43b329ca7cb2919b6338b4231fe048253");
         String connectionString = "jdbc:postgresql://localhost:5432/agric_hub_test";
-        Sql2o sql2o = new Sql2o(connectionString, "vincent", "Taptet#2001");
+        Sql2o sql2o = new Sql2o(connectionString, "maureenbett", "kenyan082bett");
         customerDao = new Sql2oCustomerDao(sql2o);
         farmerDao = new Sql2oFarmerDao(sql2o);
         productDao = new Sql2oProductDao(sql2o);
