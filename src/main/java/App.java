@@ -65,9 +65,13 @@ public class App {
             String location = req.queryParams("location");
             String email = req.queryParams("email");
             Farmer farmer = new Farmer(name, location, email);
-            farmerDao.add(farmer);
-            res.redirect("/");
-            return null;
+            try{
+                farmerDao.add(farmer);
+                res.redirect("/");
+                return null;
+            } catch (NullPointerException ex) {
+                return  new ModelAndView(models, "exceptions.hbs");
+            }
         }, new HandlebarsTemplateEngine());
 
         //get: delete all entries
@@ -249,9 +253,13 @@ public class App {
             Map<String, Object> models = new HashMap<>();
             String name = req.queryParams("name");
             Product product = new Product(name);
-            productDao.add(product);
-            res.redirect("/");
-            return null;
+            try{
+                productDao.add(product);
+                res.redirect("/");
+                return null;
+            }catch (NullPointerException ex) {
+                return new ModelAndView(models, "exceptions.hbs");
+            }
         }, new HandlebarsTemplateEngine());
 
         //get: delete all products
@@ -329,9 +337,13 @@ public class App {
             String location = req.queryParams("location");
             String email = req.queryParams("email");
             Customer customer = new Customer(name, location, email);
-            customerDao.add(customer);
-            res.redirect("/");
-            return null;
+            try{
+                customerDao.add(customer);
+                res.redirect("/");
+                return null;
+            }catch (NullPointerException ex){
+                return  new ModelAndView(models, "exceptions.hbs");
+            }
         }, new HandlebarsTemplateEngine());
 
 
