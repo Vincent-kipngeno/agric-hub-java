@@ -12,6 +12,7 @@ td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
+    color:black;
 }
 
 tr:nth-child(even) {
@@ -22,7 +23,7 @@ html, body{
         overflow-x: hidden;
     }
     .intro-2 {
-        background: url("https://mdbootstrap.com/img/Photos/Others/img (51).jpg") rgba(0, 0, 0, 0.5) no-repeat center center;
+        background: url("images/produce1.jpeg") rgba(0, 0, 0, 0.5) no-repeat center center;
         background-size: cover;
         text-align: center;
         color: white;
@@ -31,7 +32,7 @@ html, body{
        font-family:'El Messiri', sans-serif;
     }
     body{
-    color: white;
+
     font-family:'El Messiri', sans-serif;
     }
     }
